@@ -33,8 +33,6 @@ TPreviewUpdater::TPreviewUpdater(BHandler* theTarget, BMessage* theMessage, uint
 	fMessage        = theMessage;
 	fInterval       = theInterval;
 
-	BLooper* theLooper = theTarget->Looper();
-
 	status_t myErr;
 	fMessenger = new BMessenger(fTarget, NULL, &myErr);
 
@@ -99,7 +97,6 @@ int32 TPreviewUpdater::Timer()
 		// Is window still alive?  If not, exit.
 		if ( fMessenger->LockTarget() ) {
 			BLooper* myLooper;
-			BHandler* myHandler = fMessenger->Target(&myLooper);
 			myLooper->Unlock();
 
 			fMessenger->SendMessage(fMessage);

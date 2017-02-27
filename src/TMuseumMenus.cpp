@@ -271,7 +271,6 @@ bool TMuseumMenus::AddEditMenu()
 bool TMuseumMenus::AddCueSheetMenu()
 {
 	bool retVal;
-	char accelStr;
 	char menuStr[256];
 
 	//	Create menu
@@ -466,7 +465,6 @@ bool TMuseumMenus::AddCueMenu()
 bool TMuseumMenus::AddStageMenu()
 {
 	bool retVal;
-	char accelStr[1];
 	char menuStr[256];
 
 	//	Create Menu
@@ -533,7 +531,6 @@ bool TMuseumMenus::AddStageMenu()
 bool TMuseumMenus::AddCaptureMenu()
 {
 	bool retVal;
-	char accelStr;
 	char menuStr[256];
 
 	//	Create menu
@@ -600,7 +597,6 @@ bool TMuseumMenus::AddCaptureMenu()
 bool TMuseumMenus::AddExportMenu()
 {
 	bool retVal;
-	char accelStr;
 	char menuStr[256];
 
 
@@ -637,7 +633,6 @@ bool TMuseumMenus::AddExportMenu()
 bool TMuseumMenus::AddWindowsMenu()
 {
 	bool retVal;
-	char accelStr;
 	char idStr;
 	char menuStr[256];
 

@@ -205,8 +205,6 @@ void TMIDIEditorView::MessageReceived(BMessage* message)
 void TMIDIEditorView::Draw(BRect updateRect)
 {
 
-	BPoint startPt, endPt;
-
 	// Set up environment
 	rgb_color saveColor = HighColor();
 	drawing_mode saveMode = DrawingMode();

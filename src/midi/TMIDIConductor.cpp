@@ -369,7 +369,6 @@ int32 TMIDIConductor::GetTotalTimeMSec()
 {
 	ConductorEvent* theEvent;
 	int32 currentUsecsPerTick = 0;
-	int32 index = 1;
 	int32 timeCountdown = fTotalTime;
 	int32 mSecTime = 0;
 

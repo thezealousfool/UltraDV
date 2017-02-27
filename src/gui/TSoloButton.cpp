@@ -186,7 +186,6 @@ void TSoloButton::MouseDown(BPoint where)
 
 	// Create and send message
 	BMessage* soloMessage = new BMessage(SOLO_BUTTON_MSG);
-	short id = fChannel->GetID();
 	soloMessage->AddInt16("ChannelID", fChannel->GetID());
 	(static_cast<MuseumApp*>(be_app)->GetCueSheet())->PostMessage(soloMessage, fChannel);
 	delete soloMessage;

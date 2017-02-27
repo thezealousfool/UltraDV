@@ -115,9 +115,9 @@ void TVideoEditorShuttle::Draw(BRect updateRect)
 
 	//      Draw nubbies.  A nubbie is a 4 pixel block consisting of a black, white, light grey and
 	//	medium grey line.
-	int32 top        = bounds.top+2;
-	int32 bottom = bounds.bottom-2;
-	for (int32 width = bounds.left+2; width < bounds.right-2; width++) {
+	int32 top        = (int32)(bounds.top+2);
+	int32 bottom = (int32)(bounds.bottom-2);
+	for (int32 width = (int32)(bounds.left+2); width < bounds.right-2; width++) {
 		SetHighColor(kBlack);
 		startPt.Set(width, top);
 		endPt.Set(width, bottom);

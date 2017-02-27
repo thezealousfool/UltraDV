@@ -163,8 +163,6 @@ TMovieCue::~TMovieCue()
 
 void TMovieCue::Init()
 {
-	bool retVal;
-
 	// Default initialization
 	TVisualCue::Init();
 
@@ -467,8 +465,8 @@ bool TMovieCue::LoadMovieFile(BMessage* message)
 		format.u.raw_video.pixel_width_aspect = 1;
 		format.u.raw_video.pixel_height_aspect = 3;
 		format.u.raw_video.display.format = B_RGB32;
-		format.u.raw_video.display.line_width = fBitmap->Bounds().Width();
-		format.u.raw_video.display.line_count = fBitmap->Bounds().Height();
+		format.u.raw_video.display.line_width = (uint32)(fBitmap->Bounds().Width());
+		format.u.raw_video.display.line_count = (uint32)(fBitmap->Bounds().Height());
 
 		err = track->DecodedFormat(&format);
 		if (err != B_OK)

@@ -257,6 +257,7 @@ float TVisualCue::GetTransparency()
 BRect TVisualCue::GetDrawArea()
 {
 	printf("GetDrawArea called\n");
+	return (BRect)(1.0,1.0);        //ABH fix this !!!
 }
 
 float TVisualCue::GetRotation()
@@ -305,7 +306,6 @@ int TVisualCue::GetDuration()
 
 BRect TVisualCue::GetCroppedArea()
 {
-	BRect area = (0,0);
 	printf("GetCroppedArea called - fix this!!!\n");
 	return (BRect)(1.0,1.0); // fix this !!!
 }
@@ -483,11 +483,10 @@ void TVisualCue::DrawSubTicks(int32 index)
 {
 	BPoint startPt, endPt;
 
-	const BRect timeBounds  = Bounds();
-	const int32 halfY               = Bounds().Height() / 2;
+	const int32 halfY       = (int32)(Bounds().Height() / 2);
 	const int32 tickHeight  = kTickHeight / 2;
 
-	int32 fpsValue  = GetFPSValue( GetCurrentTimeFormat() );
+	int32 fpsValue  = (int32)(GetFPSValue( GetCurrentTimeFormat() ));
 
 	int32 numTicks;
 	switch( GetCurrentResolution() )
@@ -753,9 +752,6 @@ void TVisualCue::HideContents()
 
 void TVisualCue::ShowControls()
 {
-
-	BRect rect;
-
 	TCueView::ShowControls();
 }
 

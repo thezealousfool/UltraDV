@@ -303,7 +303,7 @@ TVideoCaptureView::Connected(
 	out_input->source = producer;
 	out_input->destination = mDestination[i];
 	out_input->format = with_format;
-	sprintf(out_input->name, "TVideoCaptureView %d", i + 1);
+	sprintf(out_input->name, "TVideoCaptureView %ld", i + 1);
 
 	// remember the format
 	mFormat[i] = with_format.u.raw_video;
@@ -311,7 +311,6 @@ TVideoCaptureView::Connected(
 	// create a new window for this connection
 	uint32 mXSize = with_format.u.raw_video.display.line_width;
 	uint32 mYSize = with_format.u.raw_video.display.line_count;
-	uint32 mRowBytes = with_format.u.raw_video.display.bytes_per_row;
 	color_space mColorspace = with_format.u.raw_video.display.format;
 
 	mBitmap[i] = new BBitmap(BRect(0, 0, (mXSize-1), (mYSize - 1)), mColorspace, false, false);
@@ -332,7 +331,7 @@ TVideoCaptureView::Disconnected(
 
 	uint32 connection = where.id;
 
-	PROGRESS("TVideoCaptureView::Disconnect Connection #%d\n", connection);
+	PROGRESS("TVideoCaptureView::Disconnect Connection #%ld\n", connection);
 	if (mBitmap[connection] != 0)
 		delete mBitmap[connection];
 
@@ -388,7 +387,7 @@ TVideoCaptureView::GetNextInput(
 		out_input->node = Node();
 		out_input->format.u.raw_video = vid_format;
 		out_input->format.type = B_MEDIA_RAW_VIDEO;
-		sprintf(out_input->name, "TVideoCaptureView %d", mConnectionCount);
+		sprintf(out_input->name, "TVideoCaptureView %ld", mConnectionCount);
 		*cookie = 1;
 		return B_OK;
 	}
@@ -436,7 +435,6 @@ TVideoCaptureView::FormatChanged(
 	// grab the current width, height
 	uint32 mXSize = format.u.raw_video.display.line_width;
 	uint32 mYSize = format.u.raw_video.display.line_count;
-	uint32 mRowBytes = format.u.raw_video.display.bytes_per_row;
 	color_space mColorspace = format.u.raw_video.display.format;
 
 	// destroy bitmap
@@ -477,7 +475,7 @@ TVideoCaptureView::ServiceThread()
 		err = read_port_etc(mPort, &code, &msg, sizeof(msg), B_TIMEOUT, 250000);
 		if (err == B_TIMED_OUT) continue;
 		if (err < B_OK) {
-			ERROR("TVideoCaptureView::Run: Unexpected error in read_port(): %x\n", err);
+			ERROR("TVideoCaptureView::Run: Unexpected error in read_port(): %lx\n", err);
 			continue;
 		}
 
@@ -573,18 +571,14 @@ TVideoCaptureView::DisplayThread()
 				status_t err = acquire_sem_etc(mBufferAvailable, 1, B_TIMEOUT, halfPeriod * 2);
 
 				if (err == B_TIMED_OUT) {
-					ERROR("VidConsumer::DisplayThread - Error from acquire_sem_etc: 0x%x\n", err);
+					ERROR("VidConsumer::DisplayThread - Error from acquire_sem_etc: 0x%lx\n", err);
 					continue;
 				}
 
 				BBuffer* buffer = mBufferQueue->PopFirstBuffer(0);
 				uint32 connection = buffer->Header()->destination;
 
-				LOOP("Popped buffer for connection %d, Start time: %.4f, system time: %.4f diff: %.4f\n",
-				     connection,
-				     (double) buffer->Header()->start_time/M1,
-				     (double) perfTimeNow/M1,
-				     (double) (buffer->Header()->start_time - perfTimeNow)/M1);
+				LOOP("Popped buffer for connection %d, Start time: %.4f, system time: %.4f diff: %.4f\n", connection, (double) buffer->Header()->start_time/M1, (double) perfTimeNow/M1, (double) (buffer->Header()->start_time - perfTimeNow)/M1);
 
 				// Display frame if we're in B_OFFLINE mode or
 				// within +/- a half frame time of start time

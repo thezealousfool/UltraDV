@@ -143,10 +143,6 @@ bool TTransition::HasTransitionOut()
 
 void TTransition::Init()
 {
-
-	BRect r1 = fSrcRect;
-	BRect r2 = fDstRect;
-
 	fIsDone = false;
 }
 
@@ -1203,7 +1199,7 @@ void CurtainsOutIn(TVisualCue* srcView, BView* dstView, BBitmap* srcBitmap, BBit
 		// Set up source rectangle
 		BRect srcRect   = srcView->GetCroppedArea();
 
-		int32 midPt     = srcRect.Width() / 2;
+		int32 midPt     = (int32)(srcRect.Width() / 2);
 		srcRect.left    = midPt - (srcRect.Width() / 2) * percentDone / 1000;
 		srcRect.right   = midPt + (srcRect.Width() / 2) * percentDone / 1000;
 		srcRect.bottom  = srcRect.top + srcRect.Height();
@@ -2016,7 +2012,7 @@ void CurtainsOutOut(TVisualCue* srcView, BView* dstView, BBitmap* srcBitmap, BBi
 		// Set up source rectangle
 		BRect srcRect   = srcView->GetCroppedArea();
 
-		int32 midPt     = srcRect.Width() / 2;
+		int32 midPt     = (int32)(srcRect.Width() / 2);
 		srcRect.left    = midPt - (srcRect.Width() / 2);
 		srcRect.right   = midPt + (srcRect.Width() / 2);
 

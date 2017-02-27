@@ -141,8 +141,7 @@ void THeaderContainerView::Draw(BRect updateRect)
 	// Save settings
 	rgb_color saveColor = HighColor();
 
-	pattern squares = { 0xF0, 0xF0, 0xF0, 0xF0,
-		            0x0F, 0x0F, 0x0F, 0x0F };
+	pattern squares = { 0xF0, 0xF0, 0xF0, 0xF0, 0x0F, 0x0F, 0x0F, 0x0F };
 
 	// Fill Area behind first header black
 	BRect headerFill = Bounds();

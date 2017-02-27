@@ -77,7 +77,7 @@ TVideoEngine::StageThread()
 {
 	TStageView* stageView = fCueSheetView->GetParent()->GetStage()->GetStageView();
 	float fps = GetFPSValue(GetCurrentTimeFormat());
-	uint32 frameTime = 1000/fps;
+	uint32 frameTime = (uint32)(1000.0/fps);
 
 	while (true) {
 		if (fStarted) {
@@ -85,13 +85,12 @@ TVideoEngine::StageThread()
 
 			fCueSheetView->SetCurrentTime(newTime);
 
-			BList* channelList = fCueSheetView->GetChannelList();
 			if (stageView) {
 				if (stageView->LockLooper()) {
 					stageView->UpdateStage(stageView->Bounds(), newTime);
 					stageView->UnlockLooper();
 				}
-				snooze(1000000/GetFPSValue(GetCurrentTimeFormat()));
+				snooze((int64)(1000000/GetFPSValue(GetCurrentTimeFormat())));
 			}
 		} else {
 			snooze(100000);

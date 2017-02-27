@@ -82,7 +82,7 @@ void TMIDIFile::ReadHeader(HeaderChunk* header)
 	sgHdr = *header;
 
 	// Read any excess header info
-	if (fMidiChunkHeader.length > sizeof(HeaderChunk))
+	if (static_cast<uint32>(fMidiChunkHeader.length) > sizeof(HeaderChunk))
 		Read(buf, fMidiChunkHeader.length - sizeof(HeaderChunk));
 }
 

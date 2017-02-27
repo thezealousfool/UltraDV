@@ -77,7 +77,7 @@ TCueEffect::TCueEffect(BMessage* msg) :
 		return;
 	}
 
-	for (int i = 0; i < size; i++) {
+	for (uint32 i = 0; i < size; i++) {
 		// Read in the time field
 		TKeyFrame kf;
 		err = msg->FindInt32(kKeyFrameTimeLabel, &kf.ftime);
@@ -229,7 +229,7 @@ void TCueEffect::Duration(uint32 time)
 	     later != last; later++) {
 		// Frames from this point on to the final one are now invalid
 //		if (later->ftime >= time) {
-		if ((*later).ftime >= time) {
+		if ((*later).ftime >= (static_cast<int32>(time))) {
 			fkeyFrames.erase(later, last);
 			break;
 		}
@@ -296,13 +296,13 @@ TKeyFrameIterator TCueEffect::MarkKeyFrame(uint32 time)
 	TKeyFrameIterator_vol before = fkeyFrames.begin();
 	TKeyFrameIterator_vol later = before;
 	for (; later != fkeyFrames.end(); later++) {
-		if ((*later).ftime >= time)
+		if (static_cast<uint32>((*later).ftime) >= time)
 			break;
 		before++;
 	}
 
 	// There is already a key frame at this time. Choose a different time
-	if ((*later).ftime == time) {
+	if (static_cast<uint32>((*later).ftime) == time) {
 		ASSERT(false);
 		return TKeyFrameIterator();
 	}

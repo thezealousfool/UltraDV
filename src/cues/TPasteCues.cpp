@@ -77,13 +77,11 @@ void TPasteCues::Init()
 	// Get total number of channels
 	int32 numChannels = fCueSheet->GetTotalChannels();
 	char numStr[10];
-	sprintf(numStr, "%d", numChannels);
+	sprintf(numStr, "%ld", numChannels);
 
 	//
 	// Create dialog elements
 	//
-
-	BRect bounds = Bounds();
 
 	// Find main background view
 	fBackView = (BView*)FindView("PasteCuesView");
@@ -147,7 +145,7 @@ void TPasteCues::MessageReceived(BMessage* message)
 		// Get total number of channels
 		int32 numChannels = fCueSheet->GetTotalChannels();
 		char numStr[10];
-		sprintf(numStr, "%d", numChannels);
+		sprintf(numStr, "%ld", numChannels);
 
 		//      Get the time the user wants to paste at
 		int64 theTime = fPasteTime->GetTime();
@@ -192,7 +190,7 @@ void TPasteCues::MessageReceived(BMessage* message)
 		char oneStr[10];
 
 		sprintf(oneStr, "%d", 1);
-		sprintf(numStr, "%d", numChannels);
+		sprintf(numStr, "%ld", numChannels);
 
 		// Get the channel number entered
 		int32 theNum = atoi( fChannelText->Text());

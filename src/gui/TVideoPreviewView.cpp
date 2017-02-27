@@ -510,7 +510,7 @@ TVideoPreviewView::ServiceThread()
 			continue;
 
 		if (err < B_OK) {
-			ERROR("TVideoPreviewView::Run: Unexpected error in read_port(): %x\n", err);
+			ERROR("TVideoPreviewView::Run: Unexpected error in read_port(): %lx\n", err);
 			continue;
 		}
 
@@ -614,7 +614,7 @@ TVideoPreviewView::DisplayThread()
 				status_t err = acquire_sem_etc(mBufferAvailable, 1, B_TIMEOUT, halfPeriod * 2);
 
 				if (err == B_TIMED_OUT || !mConnected) {
-					ERROR("VidConsumer::DisplayThread - Error from acquire_sem_etc: 0x%x\n", err);
+					ERROR("VidConsumer::DisplayThread - Error from acquire_sem_etc: 0x%lx\n", err);
 					continue;
 				}
 

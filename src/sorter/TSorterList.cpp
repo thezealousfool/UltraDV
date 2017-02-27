@@ -534,7 +534,7 @@ void TSorterList::AddNameToDataList(BEntry* theEntry)
 	int32 numItems = GetOccurences(fileRef);
 	numItems++;
 	char itemStr[256];
-	sprintf(itemStr, " [%d]", numItems);
+	sprintf(itemStr, " [%ld]", numItems);
 
 	// Get file name
 	char theName[B_FILE_NAME_LENGTH];
@@ -613,7 +613,7 @@ void TSorterList::AddSizeToDataList(BEntry* theEntry)
 
 	int32 kBytes = theSize / 1024;
 	char sizeStr[65];
-	sprintf(sizeStr, "%dK", kBytes);
+	sprintf(sizeStr, "%ldK", kBytes);
 	float width = StringWidth(sizeStr);
 	textRect.right = textRect.left + width;
 	TSorterListItem* listItem = new TSorterListItem(0, true, textRect, sizeStr, kSizeSorter, fileRef);

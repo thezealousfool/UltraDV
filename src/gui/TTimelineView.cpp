@@ -71,9 +71,6 @@ TTimelineView::TTimelineView(BMessage* message) : BView(message)
 {
 	fCueSheetWindow = NULL;
 
-	// Set up time rect
-	const BRect bounds = Bounds();
-
 	// Load position indicator
 	fIndicator = GetIcon16FromResource("Position");
 
@@ -207,8 +204,6 @@ void TTimelineView::MouseDown(BPoint where)
 
 	// Activate cue sheet
 	Window()->Activate(true);
-
-	const BRect bounds = Bounds();
 
 	// Reset cue drag flag
 	static_cast<MuseumApp*>(be_app)->fIsCueDrag = false;
@@ -410,7 +405,6 @@ void TTimelineView::Draw(BRect updateRect)
 	}
 
 	// Draw timeline
-	BPoint textPt;
 	char timeStr[256];
 
 	// The update rect should always be sized to the visible area of the timeline to avoid drawing glitchs
@@ -431,7 +425,7 @@ void TTimelineView::Draw(BRect updateRect)
 	StrokeLine(startPt, endPt);
 
 	// updateRect.left should be divisible by kTickSpacing.  Force it to be...
-	int32 left = updateRect.left;
+	int32 left = (int32)(updateRect.left);
 	int32 mod = left % kTickSpacing;
 	updateRect.left -= mod;
 
@@ -444,15 +438,15 @@ void TTimelineView::Draw(BRect updateRect)
 	SetHighColor(kBlack);
 
 	// Text drawing point
-	int16 textPtY = ( (timeBounds.Height() - indicatorZone.Height()) / 2);
-	textPtY += indicatorZone.bottom+4;
+	int16 textPtY = (int16)( (timeBounds.Height() - indicatorZone.Height()) / 2);
+	textPtY += (int16)(indicatorZone.bottom+4);
 
 	// Get time variables
 	uint32 unitMSec       = GetUnitMSec( GetCurrentTimeFormat(), GetCurrentResolution() );
 	uint32 roundVar   = (StartTime() + Duration()) + 9;
 	timecode_type timeFormat = GetCurrentTimeFormat();
 
-	for (int32 index = updateRect.left / kTickSpacing * kTickSpacing; index < updateRect.right + kTickSpacing; index += kTickSpacing) {
+	for (int32 index = (int32)(updateRect.left / kTickSpacing * kTickSpacing); index < updateRect.right + kTickSpacing; index += kTickSpacing) {
 		// Move pen to proper area.  We are fudging here to center the text over the tick
 		startPt.Set( index - 26, timeBounds.bottom - 2);
 
@@ -470,7 +464,7 @@ void TTimelineView::Draw(BRect updateRect)
 		// Skip 00:00:00:00
 		if (time > 9) {
 			// Add in rounding factor...
-			if (time <= roundVar) {
+			if (static_cast<uint32>(time) <= roundVar) {
 				BPoint textPt;
 				textPt.x = startPt.x;
 				textPt.y = textPtY;
@@ -520,7 +514,7 @@ void TTimelineView::DrawSubTicks(int32 index)
 	//	Calculate indicator zone
 	const BRect indicatorZone(timeBounds.left, timeBounds.top, timeBounds.right, timeBounds.top+kIndicatorHeight);
 
-	int16 fpsValue  = GetFPSValue( GetCurrentTimeFormat() );
+	int16 fpsValue  = (int16)(GetFPSValue( GetCurrentTimeFormat() ));
 
 	int16 numTicks;
 	switch( GetCurrentResolution() )
@@ -648,7 +642,7 @@ void TTimelineView::UpdateTimeTick(BPoint where)
 	//	it at that time.
 	if (!IsPlaying()) {
 		BMessage* message = new BMessage(UPDATE_TIMELINE_MSG);
-		uint32 theTime = PixelsToTime((where.x), GetCurrentTimeFormat(), GetCurrentResolution());
+		uint32 theTime = PixelsToTime((uint32)(where.x), GetCurrentTimeFormat(), GetCurrentResolution());
 		message->AddInt32("TheTime", theTime);
 
 		// Inform Locator
@@ -814,7 +808,6 @@ void TTimelineView::TrackIndicator(BPoint mousePt)
 
 	// Move indicator to mouse position and track it while mouse button is down
 	BRect oldRect;
-	uint32 buttons = 0;
 
 	// Save oldRect for redraw
 	oldRect = fIndicatorRect;
@@ -829,7 +822,7 @@ void TTimelineView::TrackIndicator(BPoint mousePt)
 	DrawIndicator(oldRect);
 
 	// Update current time
-	uint32 theTime = PixelsToTime((mousePt.x), GetCurrentTimeFormat(), GetCurrentResolution());
+	uint32 theTime = PixelsToTime((uint32)(mousePt.x), GetCurrentTimeFormat(), GetCurrentResolution());
 	fCueSheetWindow->GetCueSheetView()->SetCurrentTime(theTime);
 
 	//	Tell cue sheet about new time as well.  This will inform all cues and will
@@ -867,7 +860,6 @@ void TTimelineView::TrackPlayback()
 {
 	// Move indicator to current time position
 	BRect oldRect;
-	uint32 buttons = 0;
 
 	// Get current time position in pixels
 	int32 position = TimeToPixels( GetCurrentTime() - StartTime(), GetCurrentTimeFormat(), GetCurrentResolution());

@@ -58,10 +58,10 @@ void TVideoSettings::Init()
 	fVideoCompressionSettings.fCompressor = kNone;
 
 	// Image
-	fVideoImageSettings.fHueValue           = 0.5;
-	fVideoImageSettings.fSaturationValue    = 0.5;
-	fVideoImageSettings.fBrightnessValue    = 0.5;
-	fVideoImageSettings.fContrastValue      = 0.5;
+	fVideoImageSettings.fHueValue           = 0;
+	fVideoImageSettings.fSaturationValue    = 0;
+	fVideoImageSettings.fBrightnessValue    = 0;
+	fVideoImageSettings.fContrastValue      = 0;
 
 	// Source
 	fVideoSourceSettings.fDigitizer = kTurboTVPhilips;

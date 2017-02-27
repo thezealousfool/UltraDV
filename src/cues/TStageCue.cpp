@@ -418,7 +418,6 @@ void TStageCue::DrawRegistrationPoint(BView* theView)
 	theView->Looper()->Lock();
 	theView->PushState();
 
-	const int32 kRegPointWidth = 12;
 	const int32 kRegPointHalf  = 6;
 	const int32 kRegLineLength = 2;
 
@@ -741,7 +740,6 @@ void TStageCue::InvalidateSelectionRect()
 {
 	// Create a region containing selection rect
 	BRegion theRegion;
-	BRect selectRect;
 	/*
 	   // Top
 	   selectRect.Set(Bounds().left, Bounds().top, Bounds().right, Bounds().top +kBorder);

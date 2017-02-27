@@ -362,7 +362,7 @@ void TExportZone::HandleDoubleClick(BPoint where)
 	fInRect.right   = fInRect.left + kExportSliderWidth;
 
 	//	Set up out rect.  Check for right side length bounds violation
-	int32 outRight = (bounds.left + winBounds.Width()) - kHeaderWidth;
+	int32 outRight = (int32)((bounds.left + winBounds.Width()) - kHeaderWidth);
 	if (outRight > pixelWidth)
 		outRight = pixelWidth;
 
@@ -374,8 +374,8 @@ void TExportZone::HandleDoubleClick(BPoint where)
 	fExportChannel.right = fOutRect.left;
 
 	//	Update cue sheet variables
-	fCueSheetWindow->GetCueSheetView()->SetExportStartTime( PixelsToTime(fInRect.left, GetCurrentTimeFormat(), GetCurrentResolution()) );
-	fCueSheetWindow->GetCueSheetView()->SetExportStopTime( PixelsToTime(fOutRect.right, GetCurrentTimeFormat(), GetCurrentResolution()) );
+	fCueSheetWindow->GetCueSheetView()->SetExportStartTime( PixelsToTime((uint32)(fInRect.left), GetCurrentTimeFormat(), GetCurrentResolution()) );
+	fCueSheetWindow->GetCueSheetView()->SetExportStopTime( PixelsToTime((uint32)(fOutRect.right), GetCurrentTimeFormat(), GetCurrentResolution()) );
 
 	//	Update text items
 	fCueSheetWindow->GetExportTimeView()->DrawInText();
@@ -587,8 +587,6 @@ void TExportZone::DrawOutMarker(BRect updateRect)
 
 void TExportZone::ResolutionChanged(int32 resizePixels)
 {
-	const BRect bounds = Bounds();
-
 	// Get start and duration in pixels
 	uint32 startTime = fCueSheetWindow->GetCueSheetView()->GetExportStartTime();
 	uint32 stopTime  = fCueSheetWindow->GetCueSheetView()->GetExportStopTime();
@@ -625,8 +623,6 @@ void TExportZone::ResolutionChanged(int32 resizePixels)
 void TExportZone::TrackInMarker(BPoint mousePt)
 {
 
-	const BRect bounds = Bounds();
-
 	//	Constrain to left side view area
 	if (mousePt.x < 0)
 		mousePt.x = 0;
@@ -659,7 +655,7 @@ void TExportZone::TrackInMarker(BPoint mousePt)
 	Draw(updateRect);
 
 	//	Update CueSheet variable
-	uint32 newInTime = StartTime() + PixelsToTime(fInRect.left, GetCurrentTimeFormat(), GetCurrentResolution());
+	uint32 newInTime = StartTime() + PixelsToTime((uint32)(fInRect.left), GetCurrentTimeFormat(), GetCurrentResolution());
 	fCueSheetWindow->GetCueSheetView()->SetExportStartTime(newInTime);
 
 	//	Update text
@@ -711,7 +707,7 @@ void TExportZone::TrackOutMarker(BPoint mousePt)
 	Draw(updateRect);
 
 	//	Update CueSheet variable
-	uint32 newOutTime = StartTime() + PixelsToTime(fOutRect.right, GetCurrentTimeFormat(), GetCurrentResolution());
+	uint32 newOutTime = StartTime() + PixelsToTime((uint32)(fOutRect.right), GetCurrentTimeFormat(), GetCurrentResolution());
 	fCueSheetWindow->GetCueSheetView()->SetExportStopTime(newOutTime);
 
 	//	Update text
@@ -731,7 +727,6 @@ void TExportZone::TrackZone(BPoint mousePt)
 {
 	//	Set up variables
 	const float width       = fExportChannel.Width();
-	const int32 delta       = mousePt.x - fExportChannel.left;
 
 	//	Save mousePt
 	BPoint oldPt = mousePt;
@@ -773,8 +768,8 @@ void TExportZone::TrackZone(BPoint mousePt)
 			fOutRect.right   = fOutRect.left + kExportSliderWidth;
 
 			//	Update CueSheet variables
-			uint32 newInTime  = StartTime() + PixelsToTime(fInRect.left, GetCurrentTimeFormat(), GetCurrentResolution());
-			uint32 newOutTime = StartTime() + PixelsToTime(fOutRect.right, GetCurrentTimeFormat(), GetCurrentResolution());
+			uint32 newInTime  = StartTime() + PixelsToTime((uint32)(fInRect.left), GetCurrentTimeFormat(), GetCurrentResolution());
+			uint32 newOutTime = StartTime() + PixelsToTime((uint32)(fOutRect.right), GetCurrentTimeFormat(), GetCurrentResolution());
 			fCueSheetWindow->GetCueSheetView()->SetExportStartTime(newInTime);
 			fCueSheetWindow->GetCueSheetView()->SetExportStopTime(newOutTime);
 

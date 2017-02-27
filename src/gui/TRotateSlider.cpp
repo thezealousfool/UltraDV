@@ -90,7 +90,7 @@ void TRotateSlider::SetValue(int32 value)
 	//	Update text
 	if (fTextControl != NULL) {
 		char newStr[3];
-		sprintf(newStr, "%d", value);
+		sprintf(newStr, "%ld", value);
 		fTextControl->SetText(newStr);
 	}
 

@@ -150,7 +150,7 @@ TCueView::TCueView(BaseCueChunk* TheChunk, TCueChannel* parent, BRect bounds, ch
 	fChannel = parent;
 
 	// Save start time and bounds
-	fStartTime = TheChunk->startTime;
+	fStartTime = (uint32)(TheChunk->startTime);
 
 	// The BView class will set this to true when it is done
 	fIsInstantiated = false;
@@ -726,7 +726,6 @@ void TCueView::DrawDurationDelta()
 	if (fShowDuration) {
 		if (fEndText) {
 			fEndText->Looper()->Lock();
-			const BRect textRect = fEndText->Frame();
 			fEndText->Looper()->Unlock();
 
 			Looper()->Lock();
@@ -798,7 +797,7 @@ void TCueView::DrawEffectsTray(BRect updateRect)
 		StrokeLine(endPt);
 
 		//	Draw divider lines
-		for (int32 index = fEffectsTray.top + (8+kEffectHeight); index < bounds.bottom; index += kEffectHeight) {
+		for (int32 index = (int32)(fEffectsTray.top + (8+kEffectHeight)); index < bounds.bottom; index += kEffectHeight) {
 			startPt.Set(bounds.left+3, index);
 			endPt.Set(bounds.right-4, index);
 			SetHighColor(kLightGrey);
@@ -1127,7 +1126,7 @@ void TCueView::MouseDragControls(BPoint where)
 		BRect frame = Frame();
 		BPoint dragPt = where;
 		ConvertToParent(&dragPt);
-		uint32 delta = dragPt.x - (frame.left + fChannel->Bounds().left);
+		uint32 delta = (uint32)(dragPt.x - (frame.left + fChannel->Bounds().left));
 		message.AddInt32("CueDelta", delta);
 
 		// Center the rect within the mouse for a better drag appearence
@@ -2010,7 +2009,6 @@ void TCueView::ResizeRightSide()
 	// Get frame and bounds area
 	BRect frame = Frame();
 	BRect oldFrame(0,0,-1,-1);
-	BRect cueBounds = Bounds();
 
 	//	Adjust frame left side to compensate for scrolled channel
 	frame.left  += channelBounds.left;
@@ -2079,7 +2077,7 @@ void TCueView::ResizeRightSide()
 		ResizeBy(resizeBy, 0);
 
 		// Update the duration and end times
-		uint32 endTime = PixelsToTime( frame.right, GetCurrentTimeFormat(), GetCurrentResolution());
+		uint32 endTime = PixelsToTime( (uint32)frame.right, GetCurrentTimeFormat(), GetCurrentResolution());
 
 		fDuration = endTime - fStartTime;
 
@@ -2144,7 +2142,6 @@ void TCueView::ResizeLeftSide()
 	// Get frame and bounds area
 	BRect frame = Frame();
 	BRect oldFrame(0,0,-1,-1);
-	BRect cueBounds = Bounds();
 
 	//	Adjust frame left side to compensate for scrolled channel
 	frame.left  += channelBounds.left;
@@ -2213,8 +2210,8 @@ void TCueView::ResizeLeftSide()
 		ResizeBy(resizeBy, 0);
 
 		// Update the duration and end times
-		fStartTime = PixelsToTime( frame.left, GetCurrentTimeFormat(), GetCurrentResolution());
-		uint32 endTime = PixelsToTime( frame.right, GetCurrentTimeFormat(), GetCurrentResolution());
+		fStartTime = PixelsToTime( (uint32)(frame.left), GetCurrentTimeFormat(), GetCurrentResolution());
+		uint32 endTime = PixelsToTime( (uint32)(frame.right), GetCurrentTimeFormat(), GetCurrentResolution());
 
 		// Adjust cue duration
 		fDuration = endTime - fStartTime;

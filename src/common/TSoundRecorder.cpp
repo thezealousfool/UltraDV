@@ -24,8 +24,8 @@ TSoundRecorder::TSoundRecorder(
 	BMediaNode(name ? name : "Video Sound Recording"),
 	BBufferConsumer(B_MEDIA_RAW_AUDIO)
 {
-	NODE(stderr, "SoundRecordNode::SoundRecordNode(%x, %x, %x, %x)\n",
-	     name, RecordFunc, NotifyFunc, cookie);
+	NODE(stderr, "SoundRecordNode::SoundRecordNode(%x, %x, %x, %x)\n", name, RecordFunc, NotifyFunc, cookie);
+	
 	if (!name) name = "Audio Input";
 	_mRecordHook = RecordFunc;
 	_mNotifyHook = NotifyFunc;

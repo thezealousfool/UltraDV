@@ -328,13 +328,12 @@ void TPauseCue::Preroll(TPlaybackEvent* playbackEvent, double currentTime)
 
 	// Get times
 	double cueStartTime = fStartTime;
-	double cueEndTime        = fStartTime + fDuration;
 
 	//	If the startTime == currentTime, check for pause duration
 	if (cueStartTime == currentTime) {
 		// Set up cue event
 		TCueEvent* cueEvent = new TCueEvent;
-		cueEvent->fTime = currentTime;
+		cueEvent->fTime = (int32)(currentTime);
 		cueEvent->fCue = this;
 
 		BMessage* pauseMsg = new BMessage(PAUSE_EVENT);

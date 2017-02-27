@@ -67,9 +67,6 @@ TVideoCaptureWindow::~TVideoCaptureWindow()
 	//	Get roster
 	BMediaRoster* roster = BMediaRoster::Roster();
 
-	//	Stop timesource
-	status_t retVal = roster->StopNode(fTimeSource, 0, true);
-
 	//	Close running connections
 	roster->StopNode(fFrom.node, 0, true);
 	roster->StopNode(fTo.node, 0, true);
@@ -77,9 +74,6 @@ TVideoCaptureWindow::~TVideoCaptureWindow()
 	roster->ReleaseNode(fFrom.node);
 	roster->ReleaseNode(fTo.node);
 	roster->ReleaseNode(fTimeSource);
-
-	// Exit from all threads
-	status_t status;
 }
 
 
@@ -140,7 +134,7 @@ void TVideoCaptureWindow::Init()
 		printf("Can't get TimeSource!\n");
 		return;
 	}
-	printf("TimeSource found: %d (%x)\n", fTimeSource.node, fTimeSource.port);
+	printf("TimeSource found: %d (%lx)\n", fTimeSource.node, fTimeSource.port);
 
 	//	Find video source
 	err = mediaRoster->GetVideoInput(&fVideoSource);
@@ -150,7 +144,7 @@ void TVideoCaptureWindow::Init()
 		be_app->PostMessage(B_QUIT_REQUESTED);
 		return;
 	}
-	printf("input found: %d (%x)\n", fVideoSource.node, fVideoSource.port);
+	printf("input found: %d (%lx)\n", fVideoSource.node, fVideoSource.port);
 
 	//	Find output from video source
 	int32 cnt = 0;
@@ -344,8 +338,6 @@ void TVideoCaptureWindow::Init()
 
 void TVideoCaptureWindow::MessageReceived(BMessage* message)
 {
-	status_t status;
-
 	switch (message->what)
 	{
 	//	Pass message on to view...
