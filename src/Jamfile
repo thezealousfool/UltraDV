@@ -124,8 +124,6 @@ Application UltraDV :
 	TMuseumPrefs.cpp
 	TMuseumSlider.cpp
 	TMuteButton.cpp
-	TNewProject.cpp
-	TNewProjectBox.cpp
 	TNumberBevelTextView.cpp
 	TNumberTextControl.cpp
 	TNumberTextView.cpp

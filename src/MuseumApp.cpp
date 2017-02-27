@@ -58,7 +58,6 @@
 #include "TAddChannel.h"
 #include "TDeleteChannel.h"
 #include "TStageSetup.h"
-#include "TNewProject.h"
 #include "TAudioSettingsDialog.h"
 #include "TVideoSettingsDialog.h"
 #include "TAudioCaptureWindow.h"
@@ -238,14 +237,19 @@ void MuseumApp::ReadyToRun()
 	// Load cue add-ons and create list
 	LoadCueAddOns();
 
-	// Present user with new project setting
-	BMessage* theMessage = GetWindowFromResource("NewProjectWindow");
-	TNewProject* theDialog = new TNewProject(this, theMessage);
-	ASSERT(theDialog);
-	CenterWindow(theDialog);
+	// NOTE: In the original UltraDV source there was a preset window
+	// allowing to set the project type. It has been removed for
+	// modernity reasons. Can be found in history.
+	TPreset* thePreset = new TPreset("New Project");
 
-	// Show the dialog
-	theDialog->Show();
+	BMessage invokeMessage(NEW_PROJECT_MSG);
+	BMessage* archiveMessage = new BMessage();
+	thePreset->Archive(archiveMessage);
+	invokeMessage.AddMessage("Preset", archiveMessage);
+
+	// Inform application
+	PostMessage(&invokeMessage);
+
 	WATCH("End of ReadyToRun\n");
 }
 
