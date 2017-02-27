@@ -39,21 +39,21 @@ SEARCH_SOURCE += [ FDirName $(TOP) src transitions ] ;
 SEARCH_SOURCE += [ FDirName $(TOP) src windows ] ;
 
 Application UltraDV :
-	# framework
+	MuseumApp.cpp
 
+	# framework
 	AppAlerts.cpp
 	AppUtils.cpp
-	BaseCueChunk.cpp
+	#BaseCueChunk.cpp
 	DebugUtils.cpp
 	fft.cpp
-	FileIO.cpp
-	MuseumApp.cpp
+	#FileIO.cpp
 	ResourceManager.cpp
 	TAboutBox.cpp
-	TActionCuePalette.cpp
-	TActionCuePaletteView.cpp
+	#TActionCuePalette.cpp
+	#TActionCuePaletteView.cpp
 	TAddChannel.cpp
-	TAudibleEffect.cpp
+	#TAudibleEffect.cpp
 	TAudioCaptureToolbar.cpp
 	TAudioCaptureWindow.cpp
 	TAudioCompressionView.cpp
@@ -64,21 +64,21 @@ Application UltraDV :
 	TAudioSettingsView.cpp
 	TAudioSourceView.cpp
 	TBitmapButton.cpp
-	TBitmapStream.cpp
+	#TBitmapStream.cpp
 	TBitmapView.cpp
 	TBrowserTabView.cpp
 	TBrowserWindow.cpp
-	TChannelCueButton.cpp
+	#TChannelCueButton.cpp
 	TChannelName.cpp
 	TChannelNameView.cpp
-	TChaser.cpp
-	TCollection.cpp
-	TCompositor.cpp
+	#TChaser.cpp
+	#TCollection.cpp
+	#TCompositor.cpp
 	TContractAllButton.cpp
 	TCueButton.cpp
 	TCueChannel.cpp
 	TCueChannelHeader.cpp
-	TCueData.cpp
+	#TCueData.cpp
 	TCueEffect.cpp
 	TCueEffectView.cpp
 	TCueMenu.cpp
@@ -90,32 +90,29 @@ Application UltraDV :
 	TCueSheetView.cpp
 	TCueSheetWindow.cpp
 	TCueTimeText.cpp
-	TCueTransitionButton.cpp
+	#TCueTransitionButton.cpp
 	TCueView.cpp
-	TCursor.cpp
+	#TCursor.cpp
 	TDeleteChannel.cpp
 	TElementsScrollBarH.cpp
 	TElementsScrollBarV.cpp
 	TElementsSorter.cpp
-	TElementsTrackerView.cpp
+	#TElementsTrackerView.cpp
 	TElementsView.cpp
 	TExpandAllButton.cpp
 	TExpandButton.cpp
-	TExportText.cpp
+	#TExportText.cpp
 	TExportTimeView.cpp
 	TExportZone.cpp
+
 	THeaderContainerView.cpp
 	TIconView.cpp
-	TimedBufferQueue.cpp
 	TKeyFrame.cpp
 	TLevelsSlider.cpp
 	TLockButton.cpp
 	TMediaCuePalette.cpp
 	TMediaCuePaletteView.cpp
 	TMediaTabView.cpp
-	TMIDIConductor.cpp
-	TMIDIFile.cpp
-	TMIDITrack.cpp
 	TMouseWatcher.cpp
 	TMuseumClipboard.cpp
 	TMuseumIcons.cpp
@@ -123,31 +120,31 @@ Application UltraDV :
 	TMuseumPrefs.cpp
 	TMuseumSlider.cpp
 	TMuteButton.cpp
-	TNumberBevelTextView.cpp
+	#TNumberBevelTextView.cpp
 	TNumberTextControl.cpp
-	TNumberTextView.cpp
-	TOpacityDialog.cpp
-	TOpacitySlider.cpp
+	#TNumberTextView.cpp
+	#TOpacityDialog.cpp
+	#TOpacitySlider.cpp
 	TPaletteStatusView.cpp
 	TPasteCues.cpp
-	TPlaybackList.cpp
+	#TPlaybackList.cpp
 	TPointerButton.cpp
 	TPolygon.cpp
 	TPreset.cpp
-	TPreviewUpdater.cpp
+	#TPreviewUpdater.cpp
 	TProjectSettings.cpp
 	TRadioBitmapButton.cpp
 	TRazorButton.cpp
 	TRecordPrefsDialog.cpp
 	TRefFilter.cpp
-	TRotateDialog.cpp
-	TRotateSlider.cpp
-	TScaleDialog.cpp
+	#TRotateDialog.cpp
+	#TRotateSlider.cpp
+	#TScaleDialog.cpp
+
 	TSettingsTabView.cpp
 	TSizeScrollView.cpp
 	TSlider.cpp
 	TSoloButton.cpp
-	TSoundRecorder.cpp
 	TStageCue.cpp
 	TStageCueMenu.cpp
 	TStageSetup.cpp
@@ -159,7 +156,7 @@ Application UltraDV :
 	TStatusView.cpp
 	TThread.cpp
 	TThumbnailView.cpp
-	TTimeBevelTextView.cpp
+	#TTimeBevelTextView.cpp
 	TTimelineView.cpp
 	TTimePalette.cpp
 	TTimePaletteView.cpp
@@ -167,21 +164,21 @@ Application UltraDV :
 	TTimeText.cpp
 	TTimeTextView.cpp
 	TToolbar.cpp
+
 	TTransformEffect.cpp
-	TTransition.cpp
+	#TTransition.cpp
 	TTransitionEffect.cpp
 	TTransitionMenu.cpp
-	TTransitionMenuLooper.cpp
+	#TTransitionMenuLooper.cpp
 	TTransitionsTabView.cpp
 	TTransportPalette.cpp
 	TTransportPaletteView.cpp
-	TUndo.cpp
-	TUndoEngine.cpp
+	#TUndo.cpp
 	TVideoCaptureToolbar.cpp
 	TVideoCaptureView.cpp
 	TVideoCaptureWindow.cpp
 	TVideoCompressionView.cpp
-	TVideoEditorButton.cpp
+	#TVideoEditorButton.cpp
 	TVideoImageView.cpp
 	TVideoPreviewView.cpp
 	TVideoSettings.cpp
@@ -190,18 +187,23 @@ Application UltraDV :
 	TVideoSettingsTabView.cpp
 	TVideoSettingsView.cpp
 	TVideoSourceView.cpp
-	TVisualCue.cpp
 	TVisualEffect.cpp
 	TZoomButton.cpp
 
+	# midi
+	TMIDIConductor.cpp
+	TMIDIFile.cpp
+	TMIDITrack.cpp
+
 	# cues
-	TActionCue.cpp
-	TButtonCue.cpp
-	TCDCue.cpp
-	TControlCue.cpp
-	TMarkerCue.cpp
-	TPauseCue.cpp
-	TVideoCue.cpp
+	TVisualCue.cpp
+	#TActionCue.cpp
+	#TButtonCue.cpp
+	#TCDCue.cpp
+	#TControlCue.cpp
+	#TMarkerCue.cpp
+	#TPauseCue.cpp
+	#TVideoCue.cpp
 	TAnimationCue.cpp
 	TAudioCue.cpp
 	TMIDICue.cpp
@@ -219,9 +221,9 @@ Application UltraDV :
 	TAudioTimelineView.cpp
 	TAudioZoomInButton.cpp
 	TAudioZoomOutButton.cpp
-	TMIDIEditor.cpp
-	TMIDIEditorChannel.cpp
-	TMIDIEditorView.cpp
+	#TMIDIEditor.cpp
+	#TMIDIEditorChannel.cpp
+	#TMIDIEditorView.cpp
 	TPictureCueEditor.cpp
 	TPictureCueEditorToolbar.cpp
 	TPictureCueEditorView.cpp
@@ -238,6 +240,11 @@ Application UltraDV :
 	TAudioEngine.cpp
 	TMIDIEngine.cpp
 	TVideoEngine.cpp
+	TUndoEngine.cpp
+
+	# media kit
+	TimedBufferQueue.cpp
+	TSoundRecorder.cpp
 
 	# sorter
 	TSorterBar.cpp
@@ -247,36 +254,36 @@ Application UltraDV :
 	TSorterListItem.cpp
 
 	# transitions
-	TRevealBottomLeftTopRightIn.cpp
-	TRevealBottomRightTopLeftIn.cpp
-	TRevealDownIn.cpp
-	TRevealDownOut.cpp
-	TRevealLeftIn.cpp
-	TRevealLeftOut.cpp
-	TRevealRightIn.cpp
-	TRevealRightOut.cpp
-	TRevealTopLeftBottomRightIn.cpp
-	TRevealTopRightBottomLeftIn.cpp
-	TRevealUpIn.cpp
-	TRevealUpOut.cpp
+	#TRevealBottomLeftTopRightIn.cpp
+	#TRevealBottomRightTopLeftIn.cpp
+	#TRevealDownIn.cpp
+	#TRevealDownOut.cpp
+	#TRevealLeftIn.cpp
+	#TRevealLeftOut.cpp
+	#TRevealRightIn.cpp
+	#TRevealRightOut.cpp
+	#TRevealTopLeftBottomRightIn.cpp
+	#TRevealTopRightBottomLeftIn.cpp
+	#TRevealUpIn.cpp
+	#TRevealUpOut.cpp
 	TTransitionView.cpp
-	TWipeBottomLeftToTopRightIn.cpp
-	TWipeBottomLeftToTopRightOut.cpp
-	TWipeBottomRightToTopLeftIn.cpp
-	TWipeBottomRightToTopLeftOut.cpp
-	TWipeDownIn.cpp
-	TWipeDownOut.cpp
-	TWipeLeftIn.cpp
-	TWipeLeftOut.cpp
-	TWipeRightIn.cpp
+	#TWipeBottomLeftToTopRightIn.cpp
+	#TWipeBottomLeftToTopRightOut.cpp
+	#TWipeBottomRightToTopLeftIn.cpp
+	#TWipeBottomRightToTopLeftOut.cpp
+	#TWipeDownIn.cpp
+	#TWipeDownOut.cpp
+	#TWipeLeftIn.cpp
+	#TWipeLeftOut.cpp
+	#TWipeRightIn.cpp
 	TWipeRightOut.cpp
-	TWipeTopLeftToBottomRightIn.cpp
-	TWipeTopLeftToBottomRightOut.cpp
-	TWipeTopRightToBottomLeftIn.cpp
-	TWipeTopRightToBottomLeftOut.cpp
-	TWipeUpIn.cpp
-	TWipeUpOut.cpp
-	WipeTopRightToBottomLeftIn.cpp
+	#TWipeTopLeftToBottomRightIn.cpp
+	#TWipeTopLeftToBottomRightOut.cpp
+	#TWipeTopRightToBottomLeftIn.cpp
+	#TWipeTopRightToBottomLeftOut.cpp
+	#TWipeUpIn.cpp
+	#TWipeUpOut.cpp
+	#WipeTopRightToBottomLeftIn.cpp
 
 	: be media midi $(TARGET_LIBSTDC++) tracker translation localestub 
 	: Museum.rdef
