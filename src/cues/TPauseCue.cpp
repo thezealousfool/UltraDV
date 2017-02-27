@@ -26,8 +26,6 @@
 #include "TCueView.h"
 #include "TCueChannel.h"
 #include "TPauseCue.h"
-// ABH does not exist
-#include "TPauseSetup.h"
 #include "TVideoEngine.h"
 #include "TBitmapView.h"
 

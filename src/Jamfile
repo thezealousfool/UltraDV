@@ -74,7 +74,6 @@ Application UltraDV :
 	TChaser.cpp
 	TCollection.cpp
 	TCompositor.cpp
-	#TConductor.cpp
 	TContractAllButton.cpp
 	TCueButton.cpp
 	TCueChannel.cpp
@@ -151,10 +150,7 @@ Application UltraDV :
 	TSoundRecorder.cpp
 	TStageCue.cpp
 	TStageCueMenu.cpp
-	#TStageMovieCue.cpp
-	#TStagePictureCue.cpp
 	TStageSetup.cpp
-	#TStageTextView.cpp
 	TStageToolButton.cpp
 	TStageTools.cpp
 	TStageToolsView.cpp
@@ -205,7 +201,6 @@ Application UltraDV :
 	TControlCue.cpp
 	TMarkerCue.cpp
 	TPauseCue.cpp
-	#TPauseSetup.cpp
 	TVideoCue.cpp
 	TAnimationCue.cpp
 	TAudioCue.cpp
