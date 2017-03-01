@@ -104,7 +104,7 @@ void TVideoSettingsDialog::Init()
 		be_app->PostMessage(B_QUIT_REQUESTED);
 		return;
 	}
-	printf("TimeSource found: %d (%x)\n", fTimeSource.node, fTimeSource.port);
+	printf("TimeSource found: %d (%lx)\n", fTimeSource.node, fTimeSource.port);
 
 	//	Find video source
 	err = mediaRoster->GetVideoInput(&fVideoSource);
@@ -114,7 +114,7 @@ void TVideoSettingsDialog::Init()
 		be_app->PostMessage(B_QUIT_REQUESTED);
 		return;
 	}
-	printf("input found: %d (%x)\n", fVideoSource.node, fVideoSource.port);
+	printf("input found: %d (%lx)\n", fVideoSource.node, fVideoSource.port);
 
 	//	Find output from video source
 	int32 cnt = 0;

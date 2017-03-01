@@ -187,7 +187,6 @@ void TMuteButton::MouseDown(BPoint where)
 
 	// Create and send message
 	BMessage* muteMessage = new BMessage(MUTE_BUTTON_MSG);
-	short id = fChannel->GetID();
 	muteMessage->AddInt16("ChannelID", fChannel->GetID());
 	(static_cast<MuseumApp*>(be_app)->GetCueSheet())->PostMessage(muteMessage, fChannel);
 	// Clean up

@@ -189,10 +189,10 @@ void TScaleDialog::Init()
 	BRect drawArea = fCue->GetScaledArea();
 
 	char numText[4];
-	sprintf(numText, "%d", drawArea.IntegerWidth() + 1);
+	sprintf(numText, "%ld", drawArea.IntegerWidth() + 1);
 	fWidthText->SetText(numText);
 
-	sprintf(numText, "%d", drawArea.IntegerHeight() + 1);
+	sprintf(numText, "%ld", drawArea.IntegerHeight() + 1);
 	fHeightText->SetText(numText);
 
 }
@@ -235,10 +235,6 @@ void TScaleDialog::MessageReceived(BMessage* message)
 	//	The user has modified the width text
 	case SCALE_WIDTH_TEXT_MSG:
 	{
-		//	Get text value
-		const char* numStr = fWidthText->Text();
-		int32 theVal = atoi(numStr);
-
 		//	Do we need to maintain aspect ratio?
 		if (fAspectRatio) {
 			//	Get width text value
@@ -263,9 +259,6 @@ void TScaleDialog::MessageReceived(BMessage* message)
 				break;
 
 			}
-
-			//	Calculate new height in pixels
-			int32 newHeight = width / fAspectWidth;
 
 			//	Set the new height
 			switch(fHeightUnitType)
@@ -292,10 +285,6 @@ void TScaleDialog::MessageReceived(BMessage* message)
 	//	The user has modified the height text
 	case SCALE_HEIGHT_TEXT_MSG:
 	{
-		//	Get text value
-		const char* numStr = fHeightText->Text();
-		int16 theVal = atoi(numStr);
-
 		//	Do we need to maintain aspect ratio?
 		if (fAspectRatio) {
 			//	Set height to same aspect ratio
@@ -426,7 +415,7 @@ void TScaleDialog::ConvertWidthToPixels()
 	BRect drawArea = fCue->GetScaledArea();
 
 	char numText[4];
-	sprintf(numText, "%d", drawArea.IntegerWidth() + 1);
+	sprintf(numText, "%ld", drawArea.IntegerWidth() + 1);
 	fWidthText->SetText(numText);
 }
 
@@ -459,10 +448,10 @@ void TScaleDialog::ConvertWidthToPercent()
 	BRect scaleArea         = fCue->GetScaledArea();
 
 	float percent    = scaleArea.Width() / originalArea.Width();
-	int32 percentInt = percent * 100;
+	int32 percentInt = (int32)(percent * 100);
 
 	char numText[4];
-	sprintf(numText, "%d", percentInt);
+	sprintf(numText, "%ld", percentInt);
 	fWidthText->SetText(numText);
 }
 
@@ -479,7 +468,7 @@ void TScaleDialog::ConvertHeightToPixels()
 	BRect drawArea = fCue->GetScaledArea();
 
 	char numText[4];
-	sprintf(numText, "%d", drawArea.IntegerHeight() + 1);
+	sprintf(numText, "%ld", drawArea.IntegerHeight() + 1);
 	fHeightText->SetText(numText);
 }
 
@@ -512,10 +501,10 @@ void TScaleDialog::ConvertHeightToPercent()
 	BRect scaleArea         = fCue->GetScaledArea();
 
 	float percent    = scaleArea.Height() / originalArea.Height();
-	int32 percentInt = percent * 100;
+	int32 percentInt = (int32)(percent * 100);
 
 	char numText[4];
-	sprintf(numText, "%d", percentInt);
+	sprintf(numText, "%ld", percentInt);
 	fHeightText->SetText(numText);
 }
 
@@ -552,7 +541,6 @@ float TScaleDialog::GetNewWidth()
 {
 	float retVal = 0.0;
 
-	const BRect scaleArea = fCue->GetScaledArea();
 	const BRect area          = fCue->GetArea();
 
 	const char* numStr = fWidthText->Text();
@@ -567,7 +555,7 @@ float TScaleDialog::GetNewWidth()
 
 	case kUnitsInches:
 	{
-		int32 pixels = theVal * 72;
+		int32 pixels = (int32)(theVal * 72);
 		retVal = pixels / area.Width();
 	}
 	break;
@@ -596,7 +584,6 @@ float TScaleDialog::GetNewHeight()
 {
 	float retVal = 0.0;
 
-	const BRect scaleArea = fCue->GetScaledArea();
 	const BRect area          = fCue->GetArea();
 
 	const char* numStr = fHeightText->Text();
@@ -611,7 +598,7 @@ float TScaleDialog::GetNewHeight()
 
 	case kUnitsInches:
 	{
-		int32 pixels = theVal * 72;
+		int32 pixels = (int32)(theVal * 72);
 		retVal = pixels / area.Height();
 	}
 	break;

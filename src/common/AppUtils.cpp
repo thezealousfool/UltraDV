@@ -53,61 +53,61 @@ int32 GetUnitMSec(short format, short resolution)
 		switch (format)
 		{
 		case B_TIMECODE_DEFAULT:
-			return 100.0;                           // 10th second
+			return (int32)100.0;                           // 10th second
 			break;
 
 		case B_TIMECODE_24:
-			return 1000.0 / 24;
+			return (int32)(1000.0 / 24);
 			break;
 
 		case B_TIMECODE_25:
-			return 1000.0 / 25;
+			return (int32)(1000.0 / 25);
 			break;
 
 		case B_TIMECODE_30_DROP_2:
-			return 1000.0 / 29.97;
+			return (int32)(1000.0 / 29.97);
 			break;
 
 		case B_TIMECODE_30:
-			return 1000.0 / 30;
+			return (int32)(1000.0 / 30);
 			break;
 		}
 		break;
 
 	case 1:
-		return 250.0;                           // 1/4 Second
+		return (int32)250.0;                           // 1/4 Second
 		break;
 
 	case 2:                                                 // Half Second
-		return 500.0;
+		return (int32)500.0;
 		break;
 
 	case 3:                                                 // One Second
-		return 1000.0;
+		return (int32)1000.0;
 		break;
 
 	case 4:                                                 // 2 Seconds
-		return 2000.0;
+		return (int32)2000.0;
 		break;
 
 	case 5:                                                 // 5 Seconds
-		return 5000.0;
+		return (int32)5000.0;
 		break;
 
 	case 6:                                                 // 10 Seconds
-		return 10000.0;
+		return (int32)10000.0;
 		break;
 
 	case 7:                                                 // 30 Seconds
-		return 30000.0;
+		return (int32)30000.0;
 		break;
 
 	case 8:                                                 // 1 Minute
-		return 60000.0;
+		return (int32)60000.0;
 		break;
 
 	case 9:                                                 // 5 Minutes
-		return 300000.0;
+		return (int32)300000.0;
 		break;
 
 //		case 10:					// 30 Minutes
@@ -180,10 +180,10 @@ void TimeToString(uint32 mSecTime, short format, char str[256], bool stripLeadin
 		// First minute is longer
 		if (mSecCopy > k30_DROP_MSEC_PER_TENTH_MINUTE) {
 			minutes++;
-			mSecCopy -= k30_DROP_MSEC_PER_TENTH_MINUTE;
+			mSecCopy -= (uint32)k30_DROP_MSEC_PER_TENTH_MINUTE;
 			while (mSecCopy > k30_DROP_MSEC_PER_NON_TENTH_MINUTE) {
 				minutes++;
-				mSecCopy -= k30_DROP_MSEC_PER_NON_TENTH_MINUTE;
+				mSecCopy -= (uint32)k30_DROP_MSEC_PER_NON_TENTH_MINUTE;
 			}
 			// We start at frame 2
 			fraction = 2;
@@ -191,7 +191,7 @@ void TimeToString(uint32 mSecTime, short format, char str[256], bool stripLeadin
 
 		// At this point, mSecCopy contains the number of milliseconds since the
 		// last minute time
-		fraction += (mSecCopy / k30_DROP_MSEC_PER_FRAME);
+		fraction += (short int)(mSecCopy / k30_DROP_MSEC_PER_FRAME);
 
 		// fraction is the number of frames...
 		seconds = fraction / 30;
@@ -329,27 +329,27 @@ uint32 PixelsToTime(uint32 pixels, short format, short resolution)
 	switch (format)
 	{
 	case B_TIMECODE_DEFAULT:
-		frames  = theTime / 100;
+		frames  = (int32)(theTime / 100.0);
 		theTime = (frames * 1000 + 12) / 24;
 		break;
 
 	case B_TIMECODE_24:
-		frames  = theTime / (1000.0 / 24);
+		frames  = (int32)(theTime / (1000.0 / 24));
 		theTime = (frames * 1000 + 12) / 24;
 		break;
 
 	case B_TIMECODE_25:
-		frames  = theTime / (1000.0 / 25);
+		frames  = (int32)(theTime / (1000.0 / 25));
 		theTime = (frames * 1000 + 13) / 25;
 		break;
 
 	case B_TIMECODE_30_DROP_2:
-		frames   =  theTime / (1000.0 / 29.97);
+		frames   =  (int32)(theTime / (1000.0 / 29.97));
 		theTime = (frames * 1000 + 15) / 30;
 		break;
 
 	case B_TIMECODE_30:
-		frames = theTime / (1000.0 / 30);
+		frames = (int32)(theTime / (1000.0 / 30));
 		theTime = (frames * 1000 + 15) / 30;
 		break;
 	}
@@ -375,27 +375,27 @@ uint32 ClipTime(uint32 theTime, short format, short resolution)
 	switch (format)
 	{
 	case B_TIMECODE_DEFAULT:
-		frames  = theTime / 100;
+		frames  = (int32)(theTime / 100.0);
 		theTime = (frames * 1000 + 12) / 24;
 		break;
 
 	case B_TIMECODE_24:
-		frames  = theTime / (1000.0 / 24);
+		frames  = (int32)(theTime / (1000.0 / 24));
 		theTime = (frames * 1000 + 12) / 24;
 		break;
 
 	case B_TIMECODE_25:
-		frames  = theTime / (1000.0 / 25);
+		frames  = (int32)(theTime / (1000.0 / 25));
 		theTime = (frames * 1000 + 13) / 25;
 		break;
 
 	case B_TIMECODE_30_DROP_2:
-		frames   =  theTime / (1000.0 / 29.97);
+		frames   =  (int32)(theTime / (1000.0 / 29.97));
 		theTime = (frames * 1000 + 15) / 30;
 		break;
 
 	case B_TIMECODE_30:
-		frames = theTime / (1000.0 / 30);
+		frames = (int32)(theTime / (1000.0 / 30));
 		theTime = (frames * 1000 + 15) / 30;
 		break;
 	}
@@ -430,9 +430,9 @@ float GetFPSValue(timecode_type theType)
 
 	case B_TIMECODE_30:
 		return 30;
+	default:
+		return 30;
 	}
-
-	return 30;
 }
 
 #pragma mark -
@@ -803,8 +803,6 @@ void UpdateStage()
 
 bool DiffRect( BRect* rectOne, BRect* rectTwo, BRect* dstRect)
 {
-	BRect diffRect;
-
 	if (rectOne->Intersects( *rectTwo ) ) {
 		if (rectOne->Width() > rectTwo->Width() ) {
 			// Determine shared side of rect
@@ -870,7 +868,7 @@ void FillBitmap(BBitmap* map, uint32 color)
 	ASSERT(map->ColorSpace() == B_RGB_32_BIT);
 	ASSERT(sizeof(double) == 8);
 
-	uchar* dst = (uchar*)map->Bits();
+	uchar* dst = (uchar*)(map->Bits());
 	uchar* end = dst+map->BitsLength();
 
 	if (((ulong)dst)&4) {

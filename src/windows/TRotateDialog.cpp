@@ -116,7 +116,7 @@ void TRotateDialog::Init()
 	fSlider->UseFillColor(true, &kMediumSteelBlue);
 
 	//	Set slider value
-	int32 sliderVal = fSavedRotation;
+	int32 sliderVal = (int32)fSavedRotation;
 	fSlider->SetValue(sliderVal);
 
 	//	Percentage Text Control
@@ -133,7 +133,7 @@ void TRotateDialog::Init()
 
 	//	Set text value
 	char numStr[4];
-	sprintf(numStr, "%d", sliderVal);
+	sprintf(numStr, "%ld", sliderVal);
 	fRotateText->SetText(numStr);
 
 
@@ -207,9 +207,6 @@ void TRotateDialog::MessageReceived(BMessage* message)
 	//	Result of slider operation.  Inform cue of new setting
 	case ROTATE_MSG:
 	{
-		//	Get new value
-		int32 sliderVal = fSlider->Value();
-
 		//	Get text value
 		const char* numStr = fRotateText->Text();
 		int16 theVal = atoi(numStr);
@@ -217,7 +214,7 @@ void TRotateDialog::MessageReceived(BMessage* message)
 		//	Update text if needed
 		if (theVal != fSlider->Value()) {
 			char newStr[3];
-			sprintf(newStr, "%d", fSlider->Value());
+			sprintf(newStr, "%ld", fSlider->Value());
 			fRotateText->SetText(newStr);
 		}
 	}

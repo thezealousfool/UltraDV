@@ -257,8 +257,6 @@ void TExportTimeView::DrawOutText()
 	SetHighColor(kBlack);
 	SetLowColor(kKhaki);
 
-	int32 stopTime = fCueSheetWindow->GetCueSheetView()->GetExportStopTime();
-
 	char textStr[13];
 	TimeToString(fCueSheetWindow->GetCueSheetView()->GetExportStopTime(), GetCurrentTimeFormat(), textStr, false);
 	DrawString(textStr, drawPt);

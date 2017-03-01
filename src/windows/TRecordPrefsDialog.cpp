@@ -64,8 +64,6 @@ void TRecordPrefsDialog::Init()
 	// Find background view
 	fPrefsView = (BView*)FindView("RecordPrefsView");
 
-	BBox* settingsBox = (BBox*)FindView("SettingsBox");
-
 	// Find radio buttons
 	fCaptureToDiskRadio = (BRadioButton*)FindView("CaptureToDiskRadio");
 	fCaptureToRAMRadio  = (BRadioButton*)FindView("CaptureToRAMRadio");

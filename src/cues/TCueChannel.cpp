@@ -551,7 +551,7 @@ void TCueChannel::MessageReceived(BMessage* message)
 				//	where.x = ( Bounds().right - cueWidth);
 
 				//	Calculate insertion time
-				uint32 insertTime = PixelsToTime( where.x, GetCurrentTimeFormat(), GetCurrentResolution());
+				uint32 insertTime = PixelsToTime( (uint32)where.x, GetCurrentTimeFormat(), GetCurrentResolution());
 
 				// Check for collisions with other cues
 				if (CanInsertCue(cueView, insertTime, true)) {
@@ -788,7 +788,6 @@ void TCueChannel::AddCueToList(TCueView* insertCue)
 {
 
 	TCueView* theCue;
-	BPoint endPt;
 
 	// Get total items in list
 	int32 totalItems = fCueList->CountItems();
@@ -838,7 +837,6 @@ void TCueChannel::RemoveCueFromList(TCueView* cueView)
 	if (fCueList->HasItem(cueView)) {
 		bool retVal;
 
-		int32 index = fCueList->IndexOf(cueView);
 		retVal = fCueList->RemoveItem(cueView);
 	}
 }
@@ -853,9 +851,9 @@ void TCueChannel::RemoveCueFromList(TCueView* cueView)
 
 void TCueChannel::FreeCueList()
 {
-	void* anItem;
+	TCueView* anItem;
 
-	for ( int32 i = fCueList->CountItems(); anItem = fCueList->ItemAt(i); i++ ) {
+	for ( int32 i = (fCueList->CountItems()); (anItem = (TCueView*)(fCueList->ItemAt(i))); i++ ) {
 		delete anItem;
 	}
 
@@ -947,7 +945,7 @@ void TCueChannel::CreateCue(BPoint point, int16 cueIconID)
 	fCueSheet->DeselectAllCues();
 
 	// Get insert time based on point.x
-	uint32 insertTime = PixelsToTime( point.x, GetCurrentTimeFormat(), GetCurrentResolution());
+	uint32 insertTime = PixelsToTime( (uint32)point.x, GetCurrentTimeFormat(), GetCurrentResolution());
 
 	// Create cue based on type and add it to the channel's cue list at the correct position
 	TCueView* theCue;
@@ -1048,7 +1046,7 @@ void TCueChannel::CreateCue(BPoint point, entry_ref &theRef)
 	fCueSheet->DeselectAllCues();
 
 	// Get insert time based on point.x
-	uint32 insertTime = PixelsToTime( point.x, GetCurrentTimeFormat(), GetCurrentResolution());
+	uint32 insertTime = PixelsToTime( (uint32)point.x, GetCurrentTimeFormat(), GetCurrentResolution());
 
 	// Create cue based on type and add it to the channel's cue list at the correct position
 	TCueView* theCue;
@@ -1224,7 +1222,7 @@ void TCueChannel::AddCue(TCueView* cueView)
 	cueView->MoveTo(movePt);
 
 	// Rezize to channel dimensions
-	int32 height = Frame().Height() - kCueInset*2;
+	int32 height = (int32)(Frame().Height() - kCueInset*2);
 	cueView->ResizeTo( cueView->Bounds().Width(), height);
 
 	// Add to the channel's cue list
@@ -1268,7 +1266,7 @@ void TCueChannel::InsertCue(TCueView* cueView, uint32 time)
 		cueView->SetChannel(this);
 
 		//	Resize to channel dimensions
-		int32 height = Frame().Height() - kCueInset*2;
+		int32 height = (int32)(Frame().Height() - kCueInset*2);
 		cueView->ResizeTo( cueView->Bounds().Width(), height);
 	}
 
@@ -1330,7 +1328,7 @@ void TCueChannel::InsertCue(TCueView* cueView, BPoint insertPoint, uint32 insert
 		cueView->SetChannel(this);
 
 		//	Resize to channel dimensions
-		int32 height = Frame().Height() - kCueInset*2;
+		int32 height = (int32)(Frame().Height() - kCueInset*2);
 		cueView->ResizeTo( cueView->Bounds().Width(), height);
 	}
 
@@ -1472,7 +1470,6 @@ TCueView* TCueChannel::GetNeighborLeft(TCueView* theView)
 bool TCueChannel::GetNeighborRightPoint(TCueView* theView, BPoint* where)
 {
 	TCueView* theCue;
-	BPoint rightPt;
 
 	// Get right neighbor
 	theCue = GetNeighborRight(theView);
@@ -1497,7 +1494,6 @@ bool TCueChannel::GetNeighborRightPoint(TCueView* theView, BPoint* where)
 bool TCueChannel::GetNeighborLeftPoint(TCueView* theView, BPoint* where)
 {
 	TCueView* theCue;
-	BPoint leftPt;
 
 	// Get left neighbor
 	theCue = GetNeighborLeft(theView);
@@ -1640,14 +1636,14 @@ void TCueChannel::NudgeSelectedCues(bool nudgeLeft)
 					// Get new cue position.  Clip it to the nearest resolution
 					if (nudgeLeft) {
 						//	Decrement start time
-						insertTime -= increment;
+						insertTime -= (uint32)increment;
 
 						//  Don't move ahead of the cue sheet start time
 						if (insertTime < fCueSheet->StartTime())
 							insertTime = fCueSheet->StartTime();
 					} else {
 						//	Increment start time
-						insertTime += increment;
+						insertTime += (uint32)increment;
 
 						//  Don't move after the cue sheet end time
 						if (insertTime > (fCueSheet->StartTime() + fCueSheet->Duration()) - theCue->Duration())
@@ -2284,7 +2280,7 @@ void TCueChannel::DrawTimelineGuides(BRect updateRect)
 	SetHighColor(kSteelGrey);
 
 	// updateRect.left should be divisible by kTickSpacing.  Force it to be...
-	int32 left = updateRect.left;
+	int32 left = (int32)updateRect.left;
 	int32 mod = left % kTickSpacing;
 	updateRect.left -= mod;
 
@@ -2298,7 +2294,7 @@ void TCueChannel::DrawTimelineGuides(BRect updateRect)
 	bounds.top              += (kChannelLedgeHeight+1);
 	bounds.bottom   -= (kChannelLedgeHeight+1);
 
-	for (int32 index = updateRect.left / kTickSpacing * kTickSpacing; index < updateRect.right + kTickSpacing; index += kTickSpacing) {
+	for (int32 index = (int32)(updateRect.left / kTickSpacing * kTickSpacing); index < updateRect.right + kTickSpacing; index += kTickSpacing) {
 		// Draw ticks...
 		startPt.Set( index, bounds.top);
 		endPt.Set( startPt.x, bounds.bottom);

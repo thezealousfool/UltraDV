@@ -106,11 +106,11 @@ void TLevelsSlider::Init()
 	const BRect bounds                      = Bounds();
 	const uint32 sliderWidth        = fLeftSlider->Bounds().IntegerWidth();
 	const uint32 sliderHeight       = fLeftSlider->Bounds().IntegerHeight();
-	const uint32 height             = (bounds.Height()-kTopOffset) - (sliderHeight+kBottomOffset);
+	const uint32 height             = (uint32)((bounds.Height()-kTopOffset) - (sliderHeight+kBottomOffset));
 
 	// Get pixel location of levels
-	int32 sliderLeft        = height * volLeft;
-	int32 sliderRight       = height * volRight;
+	int32 sliderLeft        = (int32)(height * volLeft);
+	int32 sliderRight       = (int32)(height * volRight);
 
 	sliderLeft  += sliderHeight+kBottomOffset;
 	sliderRight += sliderHeight+kBottomOffset;
@@ -320,8 +320,6 @@ void TLevelsSlider::MouseDown(BPoint where)
 
 	case B_PRIMARY_MOUSE_BUTTON:
 	{
-		const BRect bounds = Bounds();
-
 		// Get old positions
 		BRect oldLeftRect       = fLeftSliderRect;
 		BRect oldRightRect      = fRightSliderRect;
@@ -407,8 +405,6 @@ void TLevelsSlider::MouseDown(BPoint where)
 		}
 		// Right Side
 		else{
-			const BRect bounds = Bounds();
-
 			// Get old positions
 			BRect oldRect = fRightSliderRect;
 
@@ -482,11 +478,11 @@ void TLevelsSlider::AttachedToWindow()
 	const BRect bounds                      = Bounds();
 	const uint32 sliderWidth        = fLeftSlider->Bounds().IntegerWidth();
 	const uint32 sliderHeight       = fLeftSlider->Bounds().IntegerHeight();
-	const uint32 height             = (bounds.Height()-kTopOffset) - (sliderHeight+kBottomOffset);
+	const uint32 height             = (uint32)((bounds.Height()-kTopOffset) - (sliderHeight+kBottomOffset));
 
 	// Get pixel location of levels
-	int32 sliderLeft        = height * volLeft;
-	int32 sliderRight       = height * volRight;
+	int32 sliderLeft        = (int32)(height * volLeft);
+	int32 sliderRight       = (int32)(height * volRight);
 
 	sliderLeft  += sliderHeight+kBottomOffset;
 	sliderRight += sliderHeight+kBottomOffset;
@@ -822,10 +818,9 @@ void TLevelsSlider::UpdateVolumes(BPoint where)
 	//BDACStream    dacStream;
 
 	// Set up slider rects
-	const BRect bounds                      = Bounds();
-	const uint32 sliderWidth        = fLeftSlider->Bounds().IntegerWidth();
+	const BRect bounds              = Bounds();
 	const uint32 sliderHeight       = fLeftSlider->Bounds().IntegerHeight();
-	uint32 height                           = (bounds.Height()-kTopOffset) - (sliderHeight+kBottomOffset);
+	uint32 height                   = (uint32)((bounds.Height()-kTopOffset) - (sliderHeight+kBottomOffset));
 
 	// Invert where.y position
 	where.y = bounds.bottom - where.y;
@@ -882,17 +877,15 @@ void TLevelsSlider::UpdateLeftVolume(BPoint where)
 	//BDACStream    dacStream;
 
 	// Get current settings
-	float oldLeft, oldRight;
 	//if (fType == kAudioInputSlider)
 	//	dacStream.GetVolume(B_ADC_IN, &oldLeft, &oldRight, NULL);
 	//else
 	//	dacStream.GetVolume(B_DAC_OUT, &oldLeft, &oldRight, NULL);
 
 	// Set up slider rects
-	const BRect bounds                      = Bounds();
-	const uint32 sliderWidth        = fLeftSlider->Bounds().IntegerWidth();
+	const BRect bounds              = Bounds();
 	const uint32 sliderHeight       = fLeftSlider->Bounds().IntegerHeight();
-	uint32 height                           = (bounds.Height()-kTopOffset) - (sliderHeight+kBottomOffset);
+	uint32 height                   = (uint32)((bounds.Height()-kTopOffset) - (sliderHeight+kBottomOffset));
 
 	// Invert where.y position
 	where.y = bounds.bottom - where.y;
@@ -942,17 +935,15 @@ void TLevelsSlider::UpdateRightVolume(BPoint where)
 	//BDACStream    dacStream;
 
 	// Get current settings
-	float oldLeft, oldRight;
 	//if (fType == kAudioInputSlider)
 	//	dacStream.GetVolume(B_ADC_IN, &oldLeft, &oldRight, NULL);
 	//else
 	//	dacStream.GetVolume(B_DAC_OUT, &oldLeft, &oldRight, NULL);
 
 	// Set up slider rects
-	const BRect bounds                      = Bounds();
-	const uint32 sliderWidth        = fRightSlider->Bounds().IntegerWidth();
+	const BRect bounds              = Bounds();
 	const uint32 sliderHeight       = fRightSlider->Bounds().IntegerHeight();
-	uint32 height                           = (bounds.Height()-kTopOffset) - (sliderHeight+kBottomOffset);
+	uint32 height                   = (uint32)(bounds.Height()-kTopOffset) - (sliderHeight+kBottomOffset);
 
 	// Invert where.y position
 	where.y = bounds.bottom - where.y;

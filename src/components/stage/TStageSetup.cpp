@@ -93,23 +93,23 @@ void TStageSetup::Init()
 	int32 tmpNum;
 
 	// Width
-	tmpNum = fStage->Bounds().Width();
-	sprintf(tmpStr, "%d", tmpNum);
+	tmpNum = (int32)(fStage->Bounds().Width());
+	sprintf(tmpStr, "%ld", tmpNum);
 	fWidth->SetText( tmpStr );
 
 	// Height
-	tmpNum = fStage->Bounds().Height();
-	sprintf(tmpStr, "%d", tmpNum);
+	tmpNum = (int32)(fStage->Bounds().Height());
+	sprintf(tmpStr, "%ld", tmpNum);
 	fHeight->SetText( tmpStr );
 
 	// X Position
-	tmpNum = fStage->Frame().left;
-	sprintf(tmpStr, "%d", tmpNum);
+	tmpNum = (int32)(fStage->Frame().left);
+	sprintf(tmpStr, "%ld", tmpNum);
 	fXPos->SetText( tmpStr );
 
 	// Y Position
-	tmpNum = fStage->Frame().top;
-	sprintf(tmpStr, "%d", tmpNum);
+	tmpNum = (int32)(fStage->Frame().top);
+	sprintf(tmpStr, "%ld", tmpNum);
 	fYPos->SetText( tmpStr );
 
 	fStage->Unlock();

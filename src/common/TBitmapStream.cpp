@@ -33,7 +33,7 @@ TBitmapStream::TBitmapStream( BBitmap* bitmap)
 		fHeader.bounds          = fMap->Bounds();
 		fHeader.rowBytes        = fMap->BytesPerRow();
 		fHeader.colors          = fMap->ColorSpace();
-		fHeader.dataSize        = (fHeader.bounds.Height()+1)*fHeader.rowBytes;
+		fHeader.dataSize        = (uint32)((fHeader.bounds.Height()+1)*fHeader.rowBytes);
 		fSize = sizeof(DATABitmap)+fHeader.dataSize;
 	}
 }
@@ -68,7 +68,7 @@ status_t TBitmapStream::ReadAt( off_t pos, void* buffer, size_t size)
 		source = ((char*)fMap->Bits())+fPosition-sizeof(DATABitmap);
 	}
 
-	if (toRead > size)
+	if (toRead > static_cast<long>(size))
 		toRead = size;
 
 	memcpy(buffer, source, toRead);
@@ -95,7 +95,7 @@ status_t TBitmapStream::WriteAt( off_t pos, const void*        data, size_t size
 			dest = ((char*)fMap->Bits())+pos-sizeof(DATABitmap);
 		}
 
-		if (toWrite > size)
+		if (toWrite > static_cast<long>(size))
 			toWrite = size;
 
 		//	i e we've been told to write too much
@@ -114,7 +114,7 @@ status_t TBitmapStream::WriteAt( off_t pos, const void*        data, size_t size
 		if (pos == sizeof(DATABitmap)) {
 			if (fMap && ((fMap->Bounds() != fHeader.bounds) ||
 			             (fMap->ColorSpace() != fHeader.colors) ||
-			             (fMap->BytesPerRow() != fHeader.rowBytes))) {
+			             (fMap->BytesPerRow() != static_cast<long>(fHeader.rowBytes)))) {
 
 				//	if someone detached, we don't delete
 				if (!fDetached)
@@ -130,7 +130,7 @@ status_t TBitmapStream::WriteAt( off_t pos, const void*        data, size_t size
 					DEBUGGER("non-origin bounds!");
 
 				fMap = new BBitmap(fHeader.bounds, fHeader.colors);
-				if (fMap->BytesPerRow() != fHeader.rowBytes) {
+				if (fMap->BytesPerRow() != static_cast<long>(fHeader.rowBytes)) {
 					return B_MISMATCHED_VALUES;
 				}
 			}

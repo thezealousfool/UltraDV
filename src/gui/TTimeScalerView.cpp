@@ -97,7 +97,7 @@ void TTimeScalerView::Init()
 
 	// Set up the array of rects for hitpoint detection.  We divide the area into
 	// a number of rects equal to the total number of ticks.
-	short tickWidth = fControlRect.Width();
+	short tickWidth = (short)(fControlRect.Width());
 	short spaceWidth = tickWidth / kTotalTicks;
 
 	for (short index = 0; index < kTotalTicks; index++) {
@@ -353,8 +353,6 @@ void TTimeScalerView::DrawTimeScaleTicks()
 
 void TTimeScalerView::DrawTickIndicator()
 {
-	BPoint startPt, endPt;
-
 	// Save current color
 	PushState();
 

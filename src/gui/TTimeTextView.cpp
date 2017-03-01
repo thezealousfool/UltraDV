@@ -281,8 +281,6 @@ void TTimeTextView::KeyDown(const char* bytes, int32 numBytes)
 	}
 	// Tab key moves us through the time elements
 	else if( IsTab(theChar) || theChar == '.' ) {
-		int16 lastCell = fCurrentCell;
-
 		// Deselect all
 		Select(0,0);
 
@@ -631,6 +629,8 @@ void TTimeTextView::CheckLastEdit()
 				Insert(9, "30", 2);
 			}
 			break;
+		default:
+			break;
 		}
 	}
 	break;
@@ -838,6 +838,8 @@ void TTimeTextView::ConvertToTime(int16 theCell)
 		case B_TIMECODE_30_DROP_2:
 		case B_TIMECODE_30:
 			fTime += ((tmpNum * 1000 + 15) / 30);
+			break;
+		default:
 			break;
 		}
 		break;

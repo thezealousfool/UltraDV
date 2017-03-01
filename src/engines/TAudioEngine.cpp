@@ -22,7 +22,7 @@
 #include "TAudioEngine.h"
 
 // Constants
-const int32 RATE_SCALE = 1.0;
+const int32 RATE_SCALE = 1;
 
 //---------------------------------------------------------------------
 //	Constructor

@@ -447,7 +447,7 @@ void TAudioCaptureWindow::SetupRecordNode( BMediaNode* recorder, media_input &in
 
 	timesource = ts;
 	if (err < B_OK) {
-		fprintf(stderr, "Error in setup: %x\n", err);
+		fprintf(stderr, "Error in setup: %lx\n", err);
 	}
 }
 
@@ -486,7 +486,7 @@ void TAudioCaptureWindow::StartRecordNode( BMediaNode* node, media_input &input,
 		err = BMediaRoster::Roster()->StartNode(input.node, perf);
 
 	if (err < B_OK)
-		fprintf(stderr, "Error starting: %x\n", err);
+		fprintf(stderr, "Error starting: %lx\n", err);
 }
 
 //---------------------------------------------------------------------
@@ -519,7 +519,7 @@ void TAudioCaptureWindow::StopRecordNode()
 	fRecordNode = NULL;
 
 	if (err < B_OK)
-		fprintf(stderr, "Error stopping: %x\n", err);
+		fprintf(stderr, "Error stopping: %lx\n", err);
 }
 
 #pragma mark -
@@ -572,9 +572,6 @@ int32 _updater_thread(void* arg)
 	// Get window instance
 	TAudioCaptureWindow* audCapWindow = (TAudioCaptureWindow*)arg;
 
-	// Get capture settings
-	AudCapPtr audCap = audCapWindow->GetCaptureSettings();
-
 	// Set up file display parameters
 	off_t fileSize;
 	off_t freeSpace;
@@ -600,7 +597,7 @@ int32 _updater_thread(void* arg)
 		//	sprintf(sizeStr, "%dMB", fileKBytes);
 		//}
 		//else
-		sprintf(sizeStr, "%dK", fileKBytes);
+		sprintf(sizeStr, "%ldK", fileKBytes);
 
 		if (audCapWindow->Lock()) {
 			audCapWindow->GetFileSize()->SetText(sizeStr);
@@ -610,7 +607,7 @@ int32 _updater_thread(void* arg)
 		// Update space remaining
 		freeSpace = theVol.FreeBytes();
 		int32 freeKBytes = freeSpace /1024;
-		sprintf(sizeStr, "%dK", freeKBytes);
+		sprintf(sizeStr, "%ldK", freeKBytes);
 
 		if (audCapWindow->Lock()) {
 			audCapWindow->GetSpaceRemaining()->SetText(sizeStr);

@@ -252,10 +252,10 @@ void TAudioLevelsView::Update()
 	BRect bounds = Bounds();
 	Window()->Unlock();
 	bounds.InsetBy(1,1);
-	const int32 width       = bounds.Width();
-	const int32 height      = bounds.Height();
-	const int32 bottom      = bounds.bottom;
-	const int32 right       = bounds.right;
+	const int32 width       = (int32)bounds.Width();
+	const int32 height      = (int32)bounds.Height();
+	const int32 bottom      = (int32)bounds.bottom;
+	const int32 right       = (int32)bounds.right;
 	const int32 divNum  = height/20;
 
 
@@ -285,8 +285,8 @@ void TAudioLevelsView::Update()
 
 		fBufferLock->Unlock();
 
-		leftCount  = leftHigh   / 5.0;
-		rightCount = rightHigh  / 5.0;
+		leftCount  = (int8)(leftHigh   / 5.0);
+		rightCount = (int8)(rightHigh  / 5.0);
 
 		Window()->Lock();
 		// Dray grey boxes
@@ -356,7 +356,6 @@ bool TAudioLevelsView::streaffunc(void* data, char* buf, size_t size, void* head
 {
 
 	TAudioLevelsView* amv = (TAudioLevelsView*)data;
-	int32 count = size / 2;
 
 	amv->fBufferLock->Lock();
 
@@ -435,11 +434,10 @@ void TAudioLevelsView::DrawGreyBoxesLeft()
 	BRect bounds = Bounds();
 	bounds.InsetBy(1,1);
 
-	const int32 width       = bounds.Width();
-	const int32 height      = bounds.Height();
-	const int32 right       = bounds.right;
-	const int32 bottom      = bounds.bottom;
-	const int32 divNum  = height/20;
+	const int32 width       = (int32)bounds.Width();
+	const int32 height      = (int32)bounds.Height();
+	const int32 bottom      = (int32)bounds.bottom;
+	const int32 divNum  	= (int32)(height/20.0);
 
 	BRect fillRect;
 	fillRect.left   = bounds.left;
@@ -467,11 +465,11 @@ void TAudioLevelsView::DrawGreyBoxesRight()
 	BRect bounds = Bounds();
 	bounds.InsetBy(1,1);
 
-	const int32 width       = bounds.Width();
-	const int32 height      = bounds.Height();
-	const int32 right       = bounds.right;
-	const int32 bottom      = bounds.bottom;
-	const int32 divNum  = height/20;
+	const int32 width       = (int32)bounds.Width();
+	const int32 height      = (int32)bounds.Height();
+	const int32 right       = (int32)bounds.right;
+	const int32 bottom      = (int32)bounds.bottom;
+	const int32 divNum  	= (int32)(height/20.0);
 
 	BRect fillRect;
 	fillRect.left   = (width/2) + 2;

@@ -300,7 +300,6 @@ void TAudioEditorView::Draw(BRect updateRect)
 	}
 
 	// Draw the cached waveform bitmap
-	BPoint drawPt(updateRect.left, updateRect.top);
 	DrawBitmap(fPreviewBitmap, updateRect, updateRect);
 
 	// Restore environment
@@ -363,8 +362,6 @@ void TAudioEditorView::DrawIndicatorTick(BPoint drawPt)
 
 void TAudioEditorView::SetAudioViewBounds()
 {
-	BPoint insertPt;
-
 	// Set up bounds...
 	BRect bounds = Bounds();
 	bounds.right = fParent->fNumSamples / fParent->fSamplesPerPixel;
@@ -389,8 +386,6 @@ void TAudioEditorView::SetAudioViewBounds()
 
 void TAudioEditorView::CreateWaveFormCache(BView* previewView, const BRect bounds)
 {
-	BPoint startPt, endPt;
-
 	previewView->Looper()->Lock();
 
 	PushState();

@@ -129,7 +129,6 @@ void TCueButton::MouseMoved( BPoint where, uint32 code, const BMessage* message 
 
 	// Check to see if button is down
 	uint32 buttons = 0;
-	BPoint point;
 
 	Window()->CurrentMessage()->FindInt32("buttons", (long*)&buttons);
 	if (buttons && fMouseDown) {

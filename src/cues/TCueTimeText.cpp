@@ -952,6 +952,8 @@ void TCueTimeText::CheckLastEdit()
 			if (tmpNum > 30)
 				strncpy(&fText[9], "30", 2);
 			break;
+		default:
+			break;
 		}
 		Invalidate(fFramesRect);
 	}
@@ -1373,6 +1375,8 @@ void TCueTimeText::ConvertToTime(int16 theCell)
 		case B_TIMECODE_30_DROP_2:
 		case B_TIMECODE_30:
 			fTime += ((tmpNum * 1000 + 15) / 30);
+			break;
+		default:
 			break;
 		}
 		break;

@@ -74,7 +74,7 @@ void TAddChannel::Init()
 	// Get total number of channels
 	int32 numChannels = fCueSheet->GetTotalChannels();
 	char numStr[10];
-	sprintf(numStr, "%d", numChannels);
+	sprintf(numStr, "%ld", numChannels);
 
 	//
 	// Create dialog elements
@@ -145,7 +145,7 @@ void TAddChannel::MessageReceived(BMessage* message)
 		// Get total number of channels
 		int32 numChannels = fCueSheet->GetTotalChannels();
 		char numStr[10];
-		sprintf(numStr, "%d", numChannels);
+		sprintf(numStr, "%ld", numChannels);
 
 		// Get total number of channels the user wants to add
 		int32 newChannels = atoi(fAddChannelText->Text());
@@ -185,7 +185,7 @@ void TAddChannel::MessageReceived(BMessage* message)
 		// Get total number of channels
 		int32 numChannels = fCueSheet->GetTotalChannels();
 		char numStr[10];
-		sprintf(numStr, "%d", numChannels);
+		sprintf(numStr, "%ld", numChannels);
 
 		//      If the after channel is greater than total channels,
 		//	correct the user input

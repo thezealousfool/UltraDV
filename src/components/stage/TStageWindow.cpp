@@ -36,8 +36,7 @@
 //
 
 // Lazlo is out video editor.  It's stage window is the size of the project video output size
-TStageWindow::TStageWindow(BRect bounds, TCueSheetWindow* cueSheet) : BWindow( bounds, "Stage", B_TITLED_WINDOW_LOOK, B_NORMAL_WINDOW_FEEL,
-	                                                                       B_NOT_ZOOMABLE | B_NOT_RESIZABLE | B_NOT_CLOSABLE | B_WILL_ACCEPT_FIRST_CLICK)
+TStageWindow::TStageWindow(BRect bounds, TCueSheetWindow* cueSheet) : BWindow( bounds, "Stage", B_TITLED_WINDOW_LOOK, B_NORMAL_WINDOW_FEEL, B_NOT_ZOOMABLE | B_NOT_RESIZABLE | B_NOT_CLOSABLE | B_WILL_ACCEPT_FIRST_CLICK)
 {
 	//	Save parent cue sheet
 	fCueSheet = cueSheet;
@@ -63,7 +62,6 @@ TStageWindow::TStageWindow(BMessage* data) : BWindow(data)
 
 	// Add archived child views
 	BMessage childArchive;
-	BRect bounds;
 
 	//	StageView
 	if ( data->FindMessage("StageView", &childArchive) == B_OK) {
@@ -95,8 +93,6 @@ TStageWindow::~TStageWindow()
 
 void TStageWindow::Init()
 {
-	BFont font(be_fixed_font);
-
 	fStageView = new TStageView(Bounds(), this);
 
 	// Limit the window size

@@ -103,8 +103,6 @@ void TAudioTimelineView::Init()
 
 void TAudioTimelineView::MouseDown(BPoint where)
 {
-	BRect bounds = Bounds();
-
 	PushState();
 
 	// Clip out Header and right side of indicator zone
@@ -122,7 +120,6 @@ void TAudioTimelineView::MouseDown(BPoint where)
 	// Trap the mouse down and move the indicator
 
 	BPoint mousePt, savePt;
-	BRect sectRect;
 	uint32 buttons = 0;
 	GetMouse(&mousePt, &buttons, true);
 
@@ -337,7 +334,6 @@ void TAudioTimelineView::Draw(BRect updateRect)
 	BRect frame = Frame();
 
 	// Draw timeline
-	BPoint textPt;
 	//char  timeStr[256];
 
 	BFont font;
@@ -346,7 +342,7 @@ void TAudioTimelineView::Draw(BRect updateRect)
 	SetHighColor(kBlack);
 
 	// Calculate the number of ticks that will fit in the timeline
-	long numTicks = frame.Width() / kTickSpacing;
+	long numTicks = (long)(frame.Width() / kTickSpacing);
 
 	// gzr: to do... Should this loop be put into a thread?
 	for ( long index = 0; index <= numTicks; index++) {

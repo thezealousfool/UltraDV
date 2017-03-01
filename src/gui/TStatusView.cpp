@@ -62,7 +62,6 @@ void TStatusView::Init()
 	SetViewColor(B_TRANSPARENT_32_BIT);
 
 	// Set up the bounding rectangles for the Text Display and Tick Indicator areas
-	BRect area = Bounds();
 
 	// Set up status text
 	strcpy(fText, "");

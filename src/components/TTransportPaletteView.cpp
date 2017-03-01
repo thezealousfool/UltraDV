@@ -299,7 +299,7 @@ void TTransportPaletteView::MessageReceived(BMessage* message)
 
 		//	Set current time
 		uint32 time = GetCurrentTime();
-		time -= GetUnitMSec( GetCurrentTimeFormat(), GetCurrentResolution() ) / GetFPSValue(GetCurrentTimeFormat());
+		time -= (uint32)(GetUnitMSec( GetCurrentTimeFormat(), GetCurrentResolution() ) / GetFPSValue(GetCurrentTimeFormat()));
 
 		if (time >= StartTime())
 			cueSheet->GetCueSheetView()->SetCurrentTime(time);
@@ -346,7 +346,7 @@ void TTransportPaletteView::MessageReceived(BMessage* message)
 
 		//	Set current time
 		uint32 time = GetCurrentTime();
-		time += GetUnitMSec( GetCurrentTimeFormat(), GetCurrentResolution() ) / GetFPSValue(GetCurrentTimeFormat());
+		time += (uint32)(GetUnitMSec( GetCurrentTimeFormat(), GetCurrentResolution() ) / GetFPSValue(GetCurrentTimeFormat()));
 
 		if (time <= StartTime() + Duration())
 			cueSheet->GetCueSheetView()->SetCurrentTime(time);

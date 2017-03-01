@@ -23,6 +23,7 @@
 class TCueData;
 
 class TAudibleEffect : public TCueEffect {
+
 public:
 		// create
 	TAudibleEffect();

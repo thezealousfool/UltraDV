@@ -187,8 +187,6 @@ void TMIDIEditorChannel::MessageReceived(BMessage* message)
 void TMIDIEditorChannel::Draw(BRect updateRect)
 {
 
-	BPoint startPt, endPt;
-
 	// Set up environment
 	rgb_color saveColor = HighColor();
 	drawing_mode saveMode = DrawingMode();

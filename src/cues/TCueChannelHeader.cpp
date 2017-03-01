@@ -289,7 +289,7 @@ void TCueChannelHeader::MouseDown(BPoint where)
 	//      While the mouse is down, create an outline of the cue channel
 	//	to be displayed while dragging
 	uint32 buttons = 0;
-	BPoint point, oldPt;
+	BPoint point;
 
 	const BRect bounds = fChannel->Bounds();
 
@@ -335,7 +335,7 @@ void TCueChannelHeader::MessageReceived(BMessage* message)
 			TCueView* cueView;
 			message->FindPointer("CueView", (void**)&cueView);
 			if (&cueView) {
-				uint32 insertTime = PixelsToTime( where.x, GetCurrentTimeFormat(), GetCurrentResolution());
+				uint32 insertTime = PixelsToTime( (uint32)where.x, GetCurrentTimeFormat(), GetCurrentResolution());
 
 				// Check for collisions with other cues
 				if ( fChannel->CanInsertCue( cueView, insertTime, true) ) {

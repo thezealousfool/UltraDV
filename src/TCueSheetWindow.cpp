@@ -213,8 +213,6 @@ TCueSheetWindow::~TCueSheetWindow()
 
 void TCueSheetWindow::Init()
 {
-	status_t retVal;
-
 	// Init Undo Engine
 	fUndoEngine = new TUndoEngine();
 
@@ -347,9 +345,6 @@ void TCueSheetWindow::Init()
 
 	// Add ourself to cue sheet list
 	static_cast<MuseumApp*>(be_app)->GetCueSheetList()->AddItem(this);
-
-	//	Get reference to MediaRoster
-	BMediaRoster* roster = BMediaRoster::Roster();
 
 	// Create the video engine
 	fVideoEngine = new TVideoEngine(fCueSheetView);
@@ -822,9 +817,6 @@ void TCueSheetWindow::MenusBeginning()
 void TCueSheetWindow::AdjustFileMenu()
 {
 
-	// Get application
-	MuseumApp* theApp = static_cast<MuseumApp*>(be_app);
-
 	BMenu* theMenu = fAppMenu->GetFileMenu();
 	if (theMenu) {
 		// Save item
@@ -857,9 +849,6 @@ void TCueSheetWindow::AdjustFileMenu()
 
 void TCueSheetWindow::AdjustEditMenu()
 {
-
-	// Get application
-	MuseumApp* theApp = static_cast<MuseumApp*>(be_app);
 
 	BMenu* theMenu = fAppMenu->GetEditMenu();
 	if (theMenu) {
@@ -914,9 +903,6 @@ void TCueSheetWindow::AdjustEditMenu()
 
 void TCueSheetWindow::AdjustCueSheetMenu()
 {
-
-	// Get application
-	MuseumApp* theApp = static_cast<MuseumApp*>(be_app);
 
 	BMenu* theMenu = fAppMenu->GetCueSheetMenu();
 	if (theMenu) {
@@ -1022,9 +1008,6 @@ void TCueSheetWindow::AdjustCueSheetMenu()
 
 void TCueSheetWindow::AdjustCueMenu()
 {
-	// Get application
-	MuseumApp* theApp = static_cast<MuseumApp*>(be_app);
-
 	BMenu* theMenu = fAppMenu->GetCueMenu();
 	if (theMenu) {
 		//	Get Cue Info
@@ -1087,9 +1070,6 @@ void TCueSheetWindow::AdjustCueMenu()
 void TCueSheetWindow::AdjustStageMenu()
 {
 
-	// Get application
-	MuseumApp* theApp = static_cast<MuseumApp*>(be_app);
-
 	BMenu* theMenu = fAppMenu->GetStageMenu();
 	if (theMenu) {
 		//      Stage Item
@@ -1116,7 +1096,6 @@ void TCueSheetWindow::AdjustWindowsMenu()
 	//	Set up string buffers
 	bool retVal;
 	char* menuStr   = (char*)malloc( sizeof(char) * 256);
-	char* accelStr  = (char*)malloc( sizeof(char));
 
 	// Get application
 	MuseumApp* theApp = static_cast<MuseumApp*>(be_app);
@@ -1232,10 +1211,6 @@ void TCueSheetWindow::AdjustWindowsMenu()
 void TCueSheetWindow::AdjustScrollBars()
 {
 	const BRect scrollRect = Bounds();
-	const BRect scrollArea = fCueSheetView->Bounds();
-
-	int16 timeFormat = fCueSheetView->GetTimeFormat();
-	int16 resolution = fCueSheetView->GetResolution();
 
 	// Get start and duration in pixels
 	int32 startPixels        = TimeToPixels( fCueSheetView->StartTime(), fCueSheetView->GetTimeFormat(), fCueSheetView->GetResolution());
@@ -1251,7 +1226,7 @@ void TCueSheetWindow::AdjustScrollBars()
 	for (int32 index = 0; index < fCueSheetView->GetTotalChannels(); index++) {
 		TCueChannel* theChannel = (TCueChannel*)fCueSheetView->GetChannelList()->ItemAt(index);
 		if (theChannel)
-			totalHeight += theChannel->Bounds().Height();
+			totalHeight += (int32)(theChannel->Bounds().Height());
 	}
 
 	// Adjust vertical scrollbar

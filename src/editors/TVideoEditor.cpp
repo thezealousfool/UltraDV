@@ -101,7 +101,6 @@ TVideoEditor::~TVideoEditor()
 {
 
 	// Exit from all threads
-	status_t status;
 	fIsPlaying = false;
 	fIsLooping = false;
 
@@ -398,8 +397,6 @@ void TVideoEditor::Play()
 
 void TVideoEditor::Stop()
 {
-	status_t status;
-
 	if (fIsPlaying) {
 		// Set playback flag to true
 		fIsPlaying = false;
@@ -595,8 +592,6 @@ void TVideoEditor::SetOutPoint()
 
 void TVideoEditor::SetupTextItems()
 {
-	char tmpText[13];
-
 	BFont smallFont(be_plain_font);
 	smallFont.SetSize(10);
 

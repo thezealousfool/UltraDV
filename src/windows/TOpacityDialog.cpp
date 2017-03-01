@@ -113,7 +113,7 @@ void TOpacityDialog::Init()
 	fSlider->UseFillColor(true, &kMediumSteelBlue);
 
 	//	Set slider value
-	int32 sliderVal = fSavedOpacity * 100;
+	int32 sliderVal = (int32)(fSavedOpacity * 100);
 	fSlider->SetValue(sliderVal);
 
 	//	Percentage Text Control
@@ -130,7 +130,7 @@ void TOpacityDialog::Init()
 
 	//	Set text value
 	char numStr[4];
-	sprintf(numStr, "%d", sliderVal);
+	sprintf(numStr, "%ld", sliderVal);
 	fOpacityText->SetText(numStr);
 
 	//	Realtime Preview Checkbox
@@ -213,7 +213,7 @@ void TOpacityDialog::MessageReceived(BMessage* message)
 		//	Update text if needed
 		if (theVal != fSlider->Value()) {
 			char newStr[3];
-			sprintf(newStr, "%d", fSlider->Value());
+			sprintf(newStr, "%ld", fSlider->Value());
 			fOpacityText->SetText(newStr);
 		}
 

@@ -361,10 +361,10 @@ void TTransitionMenuLooper::MessageReceived( BMessage* message)
 	//      Check for message overflow.  The duration cannot be longer than the cue duration.
 	//	A transition in duration cannot overwrite a transition our duration and
 	//	vice-versa.
-	if (fCueView->GetTransitionInDuration() > fCueView->GetDuration())
+	if (fCueView->GetTransitionInDuration() > static_cast<uint32>(fCueView->GetDuration()))
 		fCueView->SetTransitionInDuration(fCueView->GetDuration());
 
-	if (fCueView->GetTransitionOutDuration() > fCueView->GetDuration())
+	if (fCueView->GetTransitionOutDuration() > static_cast<uint32>(fCueView->GetDuration()))
 		fCueView->SetTransitionOutDuration( fCueView->GetDuration() );
 
 	// Now check for out transition overwrites

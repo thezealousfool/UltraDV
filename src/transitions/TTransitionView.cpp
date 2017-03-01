@@ -479,7 +479,7 @@ void TTransitionView::ResizeRightSide()
 			}
 
 			//	Update effect duration
-			uint32 newDuration = PixelsToTime(fBounds.Width(), GetCurrentTimeFormat(), GetCurrentResolution());
+			uint32 newDuration = PixelsToTime((uint32)(fBounds.Width()), GetCurrentTimeFormat(), GetCurrentResolution());
 			fEffect->Duration( fEffect->StartTime() + newDuration);
 
 			//	Redraw stage
@@ -513,7 +513,7 @@ void TTransitionView::ResizeRightSide()
 		UpdateResizeZones();
 
 		//	Update effect duration
-		uint32 newDuration = PixelsToTime(fBounds.Width(), GetCurrentTimeFormat(), GetCurrentResolution());
+		uint32 newDuration = PixelsToTime((uint32)(fBounds.Width()), GetCurrentTimeFormat(), GetCurrentResolution());
 		fEffect->Duration( fEffect->StartTime() + newDuration);
 
 		//	Redraw cue
@@ -584,7 +584,7 @@ void TTransitionView::ResizeLeftSide()
 			}
 
 			//	Convert pixels to time
-			const uint32 newStart = PixelsToTime(fBounds.left,  GetCurrentTimeFormat(), GetCurrentResolution());
+			const uint32 newStart = PixelsToTime((uint32)(fBounds.left),  GetCurrentTimeFormat(), GetCurrentResolution());
 			fEffect->StartTime(newStart);
 
 			const uint32 newDuration = fCue->Duration() - fEffect->StartTime();
@@ -621,7 +621,7 @@ void TTransitionView::ResizeLeftSide()
 		UpdateResizeZones();
 
 		//	Convert pixels to time
-		const uint32 newStart = PixelsToTime(fBounds.left,  GetCurrentTimeFormat(), GetCurrentResolution());
+		const uint32 newStart = PixelsToTime((uint32)(fBounds.left),  GetCurrentTimeFormat(), GetCurrentResolution());
 		fEffect->StartTime(newStart);
 
 		const uint32 newDuration = fCue->Duration() - fEffect->StartTime();

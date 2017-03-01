@@ -165,7 +165,6 @@ void TPolygon::GetRect(BRect* theRect)
 	if ( fPointList->CountItems() >= 4) {
 		//	Copy data over
 		BPoint topLeft          = *(BPoint*)fPointList->ItemAt(0);
-		BPoint topRight         = *(BPoint*)fPointList->ItemAt(1);
 		BPoint bottomRight      = *(BPoint*)fPointList->ItemAt(2);
 		BPoint bottomLeft       = *(BPoint*)fPointList->ItemAt(3);
 

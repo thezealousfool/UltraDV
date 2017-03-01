@@ -320,8 +320,7 @@ void TCueSheetView::Draw(BRect updateRect)
 	// Save settings
 	PushState();
 
-	pattern squares = { 0xF0, 0xF0, 0xF0, 0xF0,
-		            0x0F, 0x0F, 0x0F, 0x0F };
+	pattern squares = { 0xF0, 0xF0, 0xF0, 0xF0, 0x0F, 0x0F, 0x0F, 0x0F };
 
 	// Fill with background color
 	SetHighColor(kSteelGrey);
@@ -598,9 +597,9 @@ void TCueSheetView::KeyDown(const char* bytes, int32 numBytes)
 
 void TCueSheetView::FreeChannelList()
 {
-	void* anItem;
+	TCueChannel* anItem;
 
-	for ( long i = fChannelList->CountItems(); anItem = fChannelList->ItemAt(i); i++ ) {
+	for ( long i = fChannelList->CountItems(); (anItem = (TCueChannel*)(fChannelList->ItemAt(i))); i++ ) {
 		delete anItem;
 	}
 
@@ -1064,8 +1063,6 @@ void TCueSheetView::InsertChannel(BMessage* message)
 {
 	//Window()->BeginViewTransaction();
 
-	int32 totalChannels = GetTotalChannels();
-
 	BRect bounds = Bounds();
 
 	// Get total number of channels to be inserted
@@ -1136,8 +1133,6 @@ void TCueSheetView::DeleteChannel(BMessage* message)
 
 	int32 totalChannels = GetTotalChannels();
 
-	BRect bounds = Bounds();
-
 	// Get total number of channels to be inserted
 	int32 numChannels = message->FindInt32("NumChannels");
 
@@ -1170,7 +1165,6 @@ void TCueSheetView::DeleteChannel(BMessage* message)
 			if (theHeader)
 				theHeader->Hide();
 			deletedChannel->Hide();
-			bool retVal = RemoveChild(deletedChannel);
 			theHeader->RemoveSelf();
 			delete deletedChannel;
 			delete theHeader;

@@ -363,10 +363,10 @@ void TAudioCue::CreatePreview(BView* previewView)
 		off_t seekVal = fSoundFile->SeekToFrame( bounds.left * bufferSize);
 		if ( seekVal >= 0 ) {
 			// reset our horizontal position
-			int32 hPos = bounds.left;
+			int32 hPos = (int32)(bounds.left);
 
 			// Draw the waveform from left to right
-			for (int32 currentPos = bounds.left; currentPos < bounds.right; currentPos++) {
+			for (int32 currentPos = (int32)(bounds.left); currentPos < bounds.right; currentPos++) {
 				// Exit if we have passed the end of the file
 				if ( fSamplesPerPixel * (currentPos + 1) >= fNumSamples)
 					break;
@@ -384,7 +384,6 @@ void TAudioCue::CreatePreview(BView* previewView)
 					if ( fSampleSize == 1) {
 						// Go through each sample at this pixel and find the high and low points
 						char* ptr       = (char*)soundBuffer;
-						int32 endPt =  fSamplesPerPixel * fNumChannels;
 
 						for (int32 index = 0; index < framesRead; index++) {
 							// Locate the lowest and highest samples in the buffer
@@ -399,7 +398,6 @@ void TAudioCue::CreatePreview(BView* previewView)
 						}
 					} else {
 						int16* ptr      = (int16*)soundBuffer;
-						int32 endPt =  fSamplesPerPixel * fNumChannels;
 
 						for (int32 index = 0; index < framesRead; index++) {
 							// Locate the lowest and highest samples in the buffer
@@ -501,7 +499,7 @@ void TAudioCue::ResolutionChanged( int16 theFormat, int16 theResolution)
 	TCueView::ResolutionChanged(theFormat, theResolution);
 
 	// Update samples per pixel
-	fSamplesPerPixel = fNumSamples / Bounds().Width() + 1;
+	fSamplesPerPixel = (int32)(fNumSamples / Bounds().Width() + 1);
 
 	// Create new preview
 	fUpdatePreview = true;
@@ -693,7 +691,7 @@ int32 TAudioCue::GetDefaultLength()
 	// Determine number of samples
 	int32 numSamples = (fSoundFile->CountFrames() * fSoundFile->FrameSize() ) / numChannels;
 
-	return ((double)numSamples * 1000) / fSoundFile->SamplingRate();
+	return (int32)(((double)numSamples * 1000) / fSoundFile->SamplingRate());
 }
 
 //---------------------------------------------------------------------
