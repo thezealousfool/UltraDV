@@ -44,6 +44,10 @@ TPictureCueEditor::TPictureCueEditor(BRect bounds, TPictureCue* theCue) : BWindo
 {
 	// Save cue
 	fCue = theCue;
+
+	//Default initialization
+	Init();
+
 }
 
 

@@ -1165,6 +1165,7 @@ void TCueSheetView::DeleteChannel(BMessage* message)
 			if (theHeader)
 				theHeader->Hide();
 			deletedChannel->Hide();
+			RemoveChild(deletedChannel);
 			theHeader->RemoveSelf();
 			delete deletedChannel;
 			delete theHeader;

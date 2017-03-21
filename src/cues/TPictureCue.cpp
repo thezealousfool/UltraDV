@@ -140,6 +140,7 @@ TPictureCue::TPictureCue(BMessage* theMessage) : TVisualCue(theMessage)
 	BMessage* fileMessage = new BMessage(B_REFS_RECEIVED);
 	theMessage->AddRef("refs", &fFileRef);
 
+	LoadPictureFile(fileMessage);
 	/*
 	   // We are succesful.  Init the cue
 	   if (retVal)

@@ -53,61 +53,61 @@ int32 GetUnitMSec(short format, short resolution)
 		switch (format)
 		{
 		case B_TIMECODE_DEFAULT:
-			return (int32)100.0;                           // 10th second
+			return 100;                           // 10th second
 			break;
 
 		case B_TIMECODE_24:
-			return (int32)(1000.0 / 24);
+			return 1000 / 24;
 			break;
 
 		case B_TIMECODE_25:
-			return (int32)(1000.0 / 25);
+			return 1000 / 25;
 			break;
 
 		case B_TIMECODE_30_DROP_2:
-			return (int32)(1000.0 / 29.97);
+			return 1000 / 30;
 			break;
 
 		case B_TIMECODE_30:
-			return (int32)(1000.0 / 30);
+			return 1000 / 30;
 			break;
 		}
 		break;
 
 	case 1:
-		return (int32)250.0;                           // 1/4 Second
+		return 250;                           // 1/4 Second
 		break;
 
 	case 2:                                                 // Half Second
-		return (int32)500.0;
+		return 500;
 		break;
 
 	case 3:                                                 // One Second
-		return (int32)1000.0;
+		return 1000;
 		break;
 
 	case 4:                                                 // 2 Seconds
-		return (int32)2000.0;
+		return 2000;
 		break;
 
 	case 5:                                                 // 5 Seconds
-		return (int32)5000.0;
+		return 5000;
 		break;
 
 	case 6:                                                 // 10 Seconds
-		return (int32)10000.0;
+		return 10000;
 		break;
 
 	case 7:                                                 // 30 Seconds
-		return (int32)30000.0;
+		return 30000;
 		break;
 
 	case 8:                                                 // 1 Minute
-		return (int32)60000.0;
+		return 60000;
 		break;
 
 	case 9:                                                 // 5 Minutes
-		return (int32)300000.0;
+		return 300000;
 		break;
 
 //		case 10:					// 30 Minutes

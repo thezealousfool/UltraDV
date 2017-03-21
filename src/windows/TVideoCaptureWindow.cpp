@@ -67,6 +67,9 @@ TVideoCaptureWindow::~TVideoCaptureWindow()
 	//	Get roster
 	BMediaRoster* roster = BMediaRoster::Roster();
 
+	// Stop timesource
+	roster->StopNode(fTimeSource, 0, true);
+
 	//	Close running connections
 	roster->StopNode(fFrom.node, 0, true);
 	roster->StopNode(fTo.node, 0, true);

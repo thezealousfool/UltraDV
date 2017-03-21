@@ -513,6 +513,7 @@ void TMIDICue::PlayCue(uint32 theTime)
 	fSynthFile = new BMidiSynthFile();
 
 	// Load file, set completion hook and start playback
+	fSynthFile->LoadFile(&fFileRef);
 	fSynthFile->Start();
 
 	// Create thread and let it do the playback...
